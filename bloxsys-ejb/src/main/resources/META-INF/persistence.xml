@@ -5,11 +5,12 @@
         <jta-data-source>java:/BloxsysDS</jta-data-source>
         <class>ar.com.blox.bloxsys.domain.Usuario</class>
         <class>ar.com.blox.bloxsys.domain.UsuarioRol</class>
+        <class>ar.com.blox.bloxsys.domain.Chofer</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
-            <property name="hibernate.show_sql" value="false"/>
-            <property name="hibernate.format_sql" value="false"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

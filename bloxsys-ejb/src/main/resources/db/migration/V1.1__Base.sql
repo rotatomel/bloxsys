@@ -28,3 +28,20 @@ insert into usuarios (id_usuario,login,password,nombre,email,activo,version) val
 
 insert into usuarios_roles (role,id_usuario,version) values ('ROLE_ADMIN',1,1);
 
+
+DROP TABLE IF EXISTS `choferes`;
+CREATE TABLE IF NOT EXISTS `choferes` (
+  `id_chofer` int(11) NOT NULL AUTO_INCREMENT,
+  `apellidos` varchar(45) NOT NULL,
+  `nombres` varchar(45) NOT NULL,
+  `direccion` varchar(255) NOT NULL,
+  `celular_personal` varchar(255) ,
+  `celular_corporativo` varchar(255) ,
+  `cuil` bigint NOT NULL,
+  `fecha_ingreso` date NOT NULL,
+  `fecha_vencimiento_licencia` date NOT NULL,
+  `activo` tinyint(1) not null DEFAULT '1',
+  `version` integer not null default 0,
+  PRIMARY KEY (`id_chofer`),
+  UNIQUE KEY `chofer_cuil_UNIQUE` (`cuil`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
