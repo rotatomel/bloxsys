@@ -16,19 +16,21 @@
 package ar.com.blox.bloxsys.domain;
 
 /**
- * Tipo enumerado para mantener los roles del sistema
+ * Tipo enumerado para identificar los posibles tipos de novedad que pueden ocurrir con un vehículo
  *
  * @author Rodrigo M. Tato Rothamel mailto:rotatomel@gmail.com
  */
-public enum RolesEnum {
+public enum VehiculoTiposNovedadEnum {
 
-    ROLE_ADMIN("ROLE_ADMIN", "Administradores"),
-    ROLE_USER("ROLE_USER", "Usuarios normales");
+    REPARACION("Reparación", "Se realiza una reparación al vehículo."),
+    SERVICE("Service", "Se realiza un amntenimiento preventivo."),
+    VIAJE("Viaje", "Se realiza un viaje con el vehículo."),
+    DETECCION_FALLA("Detección de falla", "Se detecta una falla en algún componente del vehículo.");
 
     private final String nombre;
     private final String descripcion;
 
-    private RolesEnum(String nombre, String descripcion) {
+    private VehiculoTiposNovedadEnum(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }

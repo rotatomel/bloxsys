@@ -1,3 +1,5 @@
+--Script for MySQL
+
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
@@ -45,3 +47,37 @@ CREATE TABLE IF NOT EXISTS `choferes` (
   PRIMARY KEY (`id_chofer`),
   UNIQUE KEY `chofer_cuil_UNIQUE` (`cuil`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `vehiculos`;
+CREATE TABLE IF NOT EXISTS `vehiculos` (
+  `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT,
+  `dominio` varchar(8) NOT NULL,
+  `marca` varchar(45) NOT NULL,
+  `modelo` varchar(45) NOT NULL,
+  `nro_chasis` varchar(45) ,
+  `nro_motor` varchar(45) ,
+  `fecha_compra` date NOT NULL,
+  `capacidad_carga` int(11),
+  `observaciones` text,
+  `activo` tinyint(1) not null DEFAULT '1',
+  `version` integer not null default 0,
+  PRIMARY KEY (`id_vehiculo`),
+  UNIQUE KEY `vehiculo_dominio_UNIQUE` (`dominio`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `vehiculos_novedades`;
+CREATE TABLE IF NOT EXISTS `vehiculos_novedades`(
+    `id_novedad` int(11) NOT NULL AUTO_INCREMENT,
+    `id_vehiculo` int(11) NOT NULL,
+    `fecha_novedad` DATETIME not null,
+    `id_usuario` int(11) NOT NULL,
+    `kilometros_realizados` int(11),
+    `horas_uso` int(11),
+    `observaciones` text,
+    `tipo_novedad` varchar(45) not null,
+    `version` integer not null default 0,
+    PRIMARY KEY (`id_novedad`),
+    CONSTRAINT `fk_vehiculos_novedades_vehiculo` FOREIGN KEY (`id_vehiculo`) REFERENCES `vehiculos` (`id_vehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `fk_vehiculos_novedades_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

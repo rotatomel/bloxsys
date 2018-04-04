@@ -11,62 +11,72 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author Rodrigo M. Tato Rothamel mailto:rotatomel@gmail.com
  */
-public class ChoferesSearchFilter extends AbstractSearchFilter {
+public class VehiculosSearchFilter extends AbstractSearchFilter {
 
     private static final long serialVersionUID = 1L;
 
     private String text;
 
-    private Boolean licenciaExpirada;
-
     private Boolean activo;
 
     @Override
     public boolean hasFilter() {
-        return hasTextFilter() || hasLicenciaExpiradaFilter() || hasActivoFilter();
+        return hasTextFilter() || hasActivoFilter();
     }
 
-    public ChoferesSearchFilter() {
+    public VehiculosSearchFilter() {
     }
 
-    public ChoferesSearchFilter(String text) {
+    public VehiculosSearchFilter(String text) {
         this.text = text;
     }
 
+    /**
+     * El texto para buscar coincidencia en alguno de los atributos de la entidad
+     *
+     * @return
+     */
     public String getText() {
         return text;
     }
 
+    /**
+     * El texto para buscar coincidencia en alguno de los atributos de la entidad
+     *
+     * @param text
+     */
     public void setText(String text) {
         this.text = text;
     }
 
-    public Boolean getLicenciaExpirada() {
-        return licenciaExpirada;
-    }
-
+    /**
+     * Si se debe buscar vehiculos activos (true) o no (false)
+     *
+     * @return
+     */
     public Boolean getActivo() {
         return activo;
     }
 
+    /**
+     * Si se debe buscar vehiculos activos (true) o no (false)
+     *
+     * @param activo
+     */
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
 
-    public void setLicenciaExpirada(Boolean licenciaExpirada) {
-        this.licenciaExpirada = licenciaExpirada;
-    }
-
+    /**
+     * Devuelve true si hay algún texto por el cual buscar
+     *
+     * @return
+     */
     public boolean hasTextFilter() {
         return StringUtils.isNotBlank(text);
-    }
-
-    public boolean hasLicenciaExpiradaFilter() {
-        return licenciaExpirada != null;
     }
 
     public boolean hasActivoFilter() {
         return activo != null;
     }
-
 }
