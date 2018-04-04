@@ -1,5 +1,11 @@
-# bloxsys
+# BloxSYS
 Repo para proyecto de BloxSys
+
+Requerimientos previos:
+
+Java JDK >=8
+Maven
+
 
 Instrucciones para ejecutar:
 
