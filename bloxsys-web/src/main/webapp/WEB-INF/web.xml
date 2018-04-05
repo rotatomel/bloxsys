@@ -9,7 +9,7 @@
 
 
 
-      <!-- JSF mapping -->
+    <!-- JSF mapping -->
     <servlet>
         <servlet-name>facesServlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -24,7 +24,7 @@
     </listener>
 
 
-<!--    <filter>
+    <!--    <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.omnifaces.filter.CharacterEncodingFilter</filter-class>
     </filter>
@@ -81,7 +81,7 @@
     </context-param>
 
     <!-- Auto scan REST service -->
-<!--    <context-param>
+    <!--    <context-param>
         <param-name>resteasy.scan</param-name>
         <param-value>true</param-value>
     </context-param>
@@ -218,6 +218,7 @@
         <web-resource-collection>
             <web-resource-name>Administradores</web-resource-name>
             <url-pattern>/protected/*</url-pattern>
+            <url-pattern>/protected/admin/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>HEAD</http-method>
@@ -231,9 +232,29 @@
         </auth-constraint>
 
     </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Usuario</web-resource-name>
+            <url-pattern>/protected/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ROLE_USER</role-name>
+        </auth-constraint>
+
+    </security-constraint>
 
     <security-role>
         <role-name>ROLE_ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <role-name>ROLE_USER</role-name>
     </security-role>
 
     <!-- Páginas de error -->

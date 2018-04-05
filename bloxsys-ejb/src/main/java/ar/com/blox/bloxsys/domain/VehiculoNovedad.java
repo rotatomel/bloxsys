@@ -5,6 +5,7 @@
  */
 package ar.com.blox.bloxsys.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
@@ -46,10 +47,10 @@ public class VehiculoNovedad extends BaseEntity {
     private Usuario idUsuario;
 
     @Column(name = "kilometros_realizados")
-    private Integer kilometrosRealizados;
+    private BigDecimal kilometrosRealizados;
 
     @Column(name = "horas_uso")
-    private Integer horasUso;
+    private BigDecimal horasUso;
 
     @Column(name = "observaciones")
     private String observaciones;
@@ -82,14 +83,6 @@ public class VehiculoNovedad extends BaseEntity {
         this.idUsuario = idUsuario;
     }
 
-    public Integer getKilometrosRealizados() {
-        return kilometrosRealizados;
-    }
-
-    public void setKilometrosRealizados(Integer kilometrosRealizados) {
-        this.kilometrosRealizados = kilometrosRealizados;
-    }
-
     public String getObservaciones() {
         return observaciones;
     }
@@ -106,11 +99,19 @@ public class VehiculoNovedad extends BaseEntity {
         this.tipoNovedad = tipoNovedad;
     }
 
-    public Integer getHorasUso() {
+    public BigDecimal getKilometrosRealizados() {
+        return kilometrosRealizados;
+    }
+
+    public void setKilometrosRealizados(BigDecimal kilometrosRealizados) {
+        this.kilometrosRealizados = kilometrosRealizados;
+    }
+
+    public BigDecimal getHorasUso() {
         return horasUso;
     }
 
-    public void setHorasUso(Integer horasUso) {
+    public void setHorasUso(BigDecimal horasUso) {
         this.horasUso = horasUso;
     }
 

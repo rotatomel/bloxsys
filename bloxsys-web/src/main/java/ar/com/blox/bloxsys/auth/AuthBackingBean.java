@@ -18,6 +18,7 @@ package ar.com.blox.bloxsys.auth;
 //import ar.com.blox.bloxsys.domain.Usuario;
 //import ar.com.blox.bloxsys.eao.UsuariosFacade;
 //import ar.com.blox.bloxsys.search.UsuariosSearchFilter;
+import ar.com.blox.bloxsys.domain.RolesEnum;
 import ar.com.blox.bloxsys.domain.Usuario;
 import ar.com.blox.bloxsys.domain.UsuarioRol;
 import ar.com.blox.bloxsys.eao.RolesFacade;
@@ -112,6 +113,14 @@ public class AuthBackingBean implements Serializable {
 
     public MenuModel getRolesMenuModel() {
         return rolesMenuModel;
+    }
+
+    public boolean getIsUserInRoleAdmin() {
+        return JSFUtil.getInstance().isUserInRole(RolesEnum.ROLE_ADMIN.name());
+    }
+
+    public boolean getIsUserInRoleUser() {
+        return JSFUtil.getInstance().isUserInRole(RolesEnum.ROLE_USER.name());
     }
 
 }
