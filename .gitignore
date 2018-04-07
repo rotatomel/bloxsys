@@ -3,3 +3,4 @@
 /bloxsys-api/target/
 /bloxsys-ear/target/
 /bloxsys-ejb/target/
+*.idea
