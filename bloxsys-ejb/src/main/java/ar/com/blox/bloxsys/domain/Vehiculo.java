@@ -137,4 +137,13 @@ public class Vehiculo extends BaseEntity {
         this.nroMotor = nroMotor;
     }
 
+    /**
+     * Obtiene la representación en String según las necesidades del negocio
+     *
+     * @return
+     */
+    public String getBusinessString() {
+        return String.format("[%s] %s - %s", dominio, marca, modelo);
+    }
+
 }

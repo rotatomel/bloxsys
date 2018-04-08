@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2014 Dilcar S.A..
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+
+    <div class="Container100 Responsive100 NoIndent">
+        <div class="Container100 ui-fluid">
+            <div class="Card">
+                <h1 class="CardBigTopic TexAlCenter">#{msg.novedadEditar}</h1>
+                <div class="SeparatorFull" />
+
+                <h:form id="userEditForm">
+
+
+                    <p:panelGrid layout="grid"  styleClass="ui-panelgrid-blank" columns="2" >
+
+                        <!-- Vehiculo -->
+                        <p:outputLabel value="#{msg.vehiculo}:" for="vehiculoField"/>
+                        <p:selectOneMenu id="vehiculoField"  converter="omnifaces.SelectItemsIndexConverter"
+                                         required="true"
+                                         value="#{vehiculosNovedadesEditBean.novedadActual.idVehiculo}"
+                                         filter="true"
+                                         filterMatchMode="contains">
+
+                            <f:selectItem  noSelectionOption="true"
+                                           itemLabel="#{msg.seleccionarUno}"
+                                           itemValue="#{null}"/>
+
+                            <f:selectItems value="#{vehiculosNovedadesEditBean.vehiculos}"
+                                           var="vehiculo"
+                                           itemLabel="#{vehiculo.businessString}"
+                                           itemValue="#{vehiculo}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <!-- Tipo de novedad -->
+                        <p:outputLabel value="#{msg.tipoNovedad}:" for="tipoNovedadField"/>
+                        <p:selectOneMenu id="tipoNovedadField"  converter="omnifaces.SelectItemsIndexConverter"
+                                         required="true"
+                                         value="#{vehiculosNovedadesEditBean.novedadActual.tipoNovedad}"
+                                         filter="true"
+                                         filterMatchMode="contains">
+
+                            <f:selectItem  noSelectionOption="true"
+                                           itemLabel="#{msg.seleccionarUno}"
+                                           itemValue="#{null}"/>
+
+                            <f:selectItems value="#{vehiculosNovedadesEditBean.tiposNovedad}"
+                                           var="tipo"
+                                           itemLabel="#{tipo.nombre}"
+                                           itemDescription="#{tipo.descripcion}"
+                                           itemValue="#{tipo}"/>
+
+                        </p:selectOneMenu>
+
+                        <!--Kilómetros realizados-->
+                        <p:outputLabel value="#{msg.kilometrosRealizados}:" for="kmsField"/>
+                        <p:inputNumber id="kmsField" value="#{vehiculosNovedadesEditBean.novedadActual.kilometrosRealizados}"
+                                       decimalPlaces="2" minValue="0" maxValue="99999999999999999.99"/>
+
+                        <!--Horas de uso-->
+                        <p:outputLabel value="#{msg.horasUso}:" for="horasField"/>
+                        <p:inputNumber id="horasField" value="#{vehiculosNovedadesEditBean.novedadActual.horasUso}"
+                                       decimalPlaces="2" minValue="0" maxValue="99999999999999999.99"/>
+
+                        <!--Costo-->
+                        <p:outputLabel value="#{msg.costo}:" for="costoField"/>
+                        <p:inputNumber id="costoField" value="#{vehiculosNovedadesEditBean.novedadActual.costo}"
+                                       decimalPlaces="2" minValue="0" maxValue="99999999999999999.99"/>
+
+                        <!--Observaciones-->
+                        <p:outputLabel value="#{msg.observaciones}:" for="observacionesField"/>
+                        <p:inputTextarea id="observacionesField" value="#{vehiculosNovedadesEditBean.novedadActual.observaciones}" />
+
+
+                    </p:panelGrid >
+                    <p:separator/>
+                    <!-- Botones de guardar y cancelar-->
+                    <p:panelGrid layout="grid"  styleClass="ui-panelgrid-blank" columns="4" >
+                        <p:commandButton id="guardarButton"
+                                         value="#{msg.guardar}"
+                                         action="#{vehiculosNovedadesEditBean.doGuardar()}"
+                                         update="@form"
+                                         ajax="true"
+                                         icon="fa fa-fw fa-save"
+                                         styleClass="GreenButton"/>
+
+                        <p:commandButton id="eliminarButton"
+                                         value="#{msg.borrar}"
+                                         action="#{vehiculosNovedadesEditBean.doEliminar()}"
+                                         update="@form"
+                                         ajax="true"
+                                         rendered="#{not vehiculosNovedadesEditBean.nuevo}"
+                                         icon="fa fa-fw fa-trash"
+                                         styleClass="RedButton"/>
+
+
+                        <p:commandButton id="cancelarButton"
+                                         value="#{msg.cancelar}"
+                                         action="/protected/vehiculos/novedades/index.xhtml?faces-redirect=true"
+                                         ajax="false"
+                                         immediate="true"
+                                         icon="fa fa-fw fa-ban"
+                                         />
+                    </p:panelGrid >
+
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+</html>

@@ -6,10 +6,10 @@
 package ar.com.blox.bloxsys.search;
 
 import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
  * @author Rodrigo M. Tato Rothamel mailto:rotatomel@gmail.com
  */
 public class VehiculosNovedadesSearchFilter extends AbstractSearchFilter {
@@ -18,11 +18,16 @@ public class VehiculosNovedadesSearchFilter extends AbstractSearchFilter {
 
     private String text;
 
+    private Long idVehiculo;
+
+    private Long idUsuario;
+
     private Date fechaDesde, fechaHasta;
 
     @Override
     public boolean hasFilter() {
-        return hasTextFilter() || hasFechasFilter();
+        return hasTextFilter() || hasFechasFilter()
+                || hasIdUsuarioFilter() || hasIdVehiculoFilter();
     }
 
     public VehiculosNovedadesSearchFilter() {
@@ -56,12 +61,36 @@ public class VehiculosNovedadesSearchFilter extends AbstractSearchFilter {
         this.fechaHasta = fechaHasta;
     }
 
+    public Long getIdVehiculo() {
+        return idVehiculo;
+    }
+
+    public void setIdVehiculo(Long idVehiculo) {
+        this.idVehiculo = idVehiculo;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     public boolean hasTextFilter() {
         return StringUtils.isNotBlank(text);
     }
 
     public boolean hasFechasFilter() {
         return (fechaDesde != null && fechaHasta != null);
+    }
+
+    public boolean hasIdVehiculoFilter() {
+        return idVehiculo != null;
+    }
+
+    public boolean hasIdUsuarioFilter() {
+        return idUsuario != null;
     }
 
 }

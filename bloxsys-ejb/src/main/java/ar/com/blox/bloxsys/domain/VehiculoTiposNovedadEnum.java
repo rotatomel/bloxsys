@@ -23,7 +23,7 @@ package ar.com.blox.bloxsys.domain;
 public enum VehiculoTiposNovedadEnum {
 
     REPARACION("Reparación", "Se realiza una reparación al vehículo."),
-    SERVICE("Service", "Se realiza un amntenimiento preventivo."),
+    SERVICE("Service", "Se realiza un mantenimiento preventivo."),
     VIAJE("Viaje", "Se realiza un viaje con el vehículo."),
     DETECCION_FALLA("Detección de falla", "Se detecta una falla en algún componente del vehículo.");
 

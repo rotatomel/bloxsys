@@ -49,6 +49,9 @@ public class VehiculoNovedad extends BaseEntity {
     @Column(name = "kilometros_realizados")
     private BigDecimal kilometrosRealizados;
 
+    @Column(name = "costo")
+    private BigDecimal costo;
+
     @Column(name = "horas_uso")
     private BigDecimal horasUso;
 
@@ -115,4 +118,11 @@ public class VehiculoNovedad extends BaseEntity {
         this.horasUso = horasUso;
     }
 
+    public BigDecimal getCosto() {
+        return costo;
+    }
+
+    public void setCosto(BigDecimal costo) {
+        this.costo = costo;
+    }
 }
