@@ -18,6 +18,7 @@ package ar.com.blox.bloxsys.eao;
 import ar.com.blox.bloxsys.domain.Chofer;
 import ar.com.blox.bloxsys.domain.Chofer_;
 import ar.com.blox.bloxsys.search.ChoferesSearchFilter;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,7 +27,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- *
  * @author Rodrigo M. Tato Rothamel <rotatomel@gmail.com>
  */
 @Stateless
@@ -65,6 +65,11 @@ public class ChoferesFacade extends AbstractFacade<Chofer, ChoferesSearchFilter>
 
         if (csf.hasLicenciaExpiradaFilter()) {
             Predicate p1 = cb.greaterThanOrEqualTo(cb.currentDate(), root.get(Chofer_.fechaVencimientoLicencia));
+            p = appendAndPredicate(cb, p, p1);
+        }
+
+        if (csf.hasActivoFilter()) {
+            Predicate p1 = cb.equal(root.get(Chofer_.activo), csf.getActivo());
             p = appendAndPredicate(cb, p, p1);
         }
 
