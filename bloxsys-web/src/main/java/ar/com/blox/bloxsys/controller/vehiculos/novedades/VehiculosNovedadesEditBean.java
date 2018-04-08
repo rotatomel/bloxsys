@@ -16,11 +16,14 @@
 package ar.com.blox.bloxsys.controller.vehiculos.novedades;
 
 import ar.com.blox.bloxsys.auth.AuthBackingBean;
+import ar.com.blox.bloxsys.domain.Chofer;
 import ar.com.blox.bloxsys.domain.Vehiculo;
 import ar.com.blox.bloxsys.domain.VehiculoNovedad;
 import ar.com.blox.bloxsys.domain.VehiculoTiposNovedadEnum;
+import ar.com.blox.bloxsys.eao.ChoferesFacade;
 import ar.com.blox.bloxsys.eao.VehiculosFacade;
 import ar.com.blox.bloxsys.eao.VehiculosNovedadesFacade;
+import ar.com.blox.bloxsys.search.ChoferesSearchFilter;
 import ar.com.blox.bloxsys.search.VehiculosSearchFilter;
 import ar.com.blox.bloxsys.utils.JSFUtil;
 
@@ -61,9 +64,14 @@ public class VehiculosNovedadesEditBean implements Serializable {
     @ManagedProperty(value = "#{authBackingBean}")
     private AuthBackingBean authBackingBean;
 
+    @EJB
+    private ChoferesFacade choferesFacade;
+
     private VehiculoNovedad novedadActual;
 
     private List<Vehiculo> vehiculos = null;
+
+    private List<Chofer> choferes = null;
 
     private boolean nuevo = false;
 
@@ -165,6 +173,22 @@ public class VehiculosNovedadesEditBean implements Serializable {
             vehiculos.addAll(vehiculosFacade.findAllBySearchFilter(vsf));
         }
         return vehiculos;
+    }
+
+    /**
+     * Obtiene la lista de choferes activos
+     *
+     * @return
+     */
+    public List<Chofer> getChoferes() {
+        if (choferes == null) {
+            choferes = new ArrayList<>();
+            ChoferesSearchFilter csf = new ChoferesSearchFilter();
+            csf.setActivo(true);
+            csf.addSortField("apellidos", true);
+            choferes.addAll(choferesFacade.findAllBySearchFilter(csf));
+        }
+        return choferes;
     }
 
     public VehiculoTiposNovedadEnum[] getTiposNovedad() {

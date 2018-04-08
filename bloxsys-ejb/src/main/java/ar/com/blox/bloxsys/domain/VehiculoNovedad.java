@@ -5,19 +5,10 @@
  */
 package ar.com.blox.bloxsys.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 /**
  * Entidad de Novedad de Vehiculo
@@ -61,6 +52,11 @@ public class VehiculoNovedad extends BaseEntity {
     @Column(name = "tipo_novedad")
     @Enumerated(EnumType.STRING)
     private VehiculoTiposNovedadEnum tipoNovedad;
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_chofer", referencedColumnName = "id_chofer")
+    private Chofer idChofer;
 
     public Vehiculo getIdVehiculo() {
         return idVehiculo;
@@ -124,5 +120,13 @@ public class VehiculoNovedad extends BaseEntity {
 
     public void setCosto(BigDecimal costo) {
         this.costo = costo;
+    }
+
+    public Chofer getIdChofer() {
+        return idChofer;
+    }
+
+    public void setIdChofer(Chofer idChofer) {
+        this.idChofer = idChofer;
     }
 }

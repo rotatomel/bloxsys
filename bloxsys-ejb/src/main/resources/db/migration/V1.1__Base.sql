@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `usuarios_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-insert into usuarios (id_usuario,login,password,nombre,email,activo,version) values (1,'admin','admin','Administrador','admin@admin.com',1,1);
+insert into usuarios (id_usuario,login,password,nombre,email,activo,version) values (1,'admin','admin','ADMINISTRADOR','admin@admin.com',1,1);
 
 insert into usuarios_roles (role,id_usuario,version) values ('ROLE_ADMIN',1,1);
 
@@ -70,6 +70,7 @@ DROP TABLE IF EXISTS `vehiculos_novedades`;
 CREATE TABLE IF NOT EXISTS `vehiculos_novedades`(
     `id_novedad` int(11) NOT NULL AUTO_INCREMENT,
     `id_vehiculo` int(11) NOT NULL,
+    `id_chofer` int(11) null,
     `fecha_novedad` DATETIME not null,
     `id_usuario` int(11) NOT NULL,
     `kilometros_realizados` decimal(19,2) default 0,
@@ -80,5 +81,6 @@ CREATE TABLE IF NOT EXISTS `vehiculos_novedades`(
     `version` integer not null default 0,
     PRIMARY KEY (`id_novedad`),
     CONSTRAINT `fk_vehiculos_novedades_vehiculo` FOREIGN KEY (`id_vehiculo`) REFERENCES `vehiculos` (`id_vehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `fk_vehiculos_novedades_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    CONSTRAINT `fk_vehiculos_novedades_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `fk_vehiculos_novedades_chofer` FOREIGN KEY (`id_chofer`) REFERENCES `choferes` (`id_chofer`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
