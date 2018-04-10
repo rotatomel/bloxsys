@@ -8,7 +8,6 @@ package ar.com.blox.bloxsys.search;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
  * @author Rodrigo M. Tato Rothamel mailto:rotatomel@gmail.com
  */
 public class UsuariosSearchFilter extends AbstractSearchFilter {
@@ -19,9 +18,11 @@ public class UsuariosSearchFilter extends AbstractSearchFilter {
 
     private String text;
 
+    private Boolean activo;
+
     @Override
     public boolean hasFilter() {
-        return hasLoginFilter() || hasTextFilter();
+        return hasLoginFilter() || hasTextFilter() || hasActivoFilter();
     }
 
     public UsuariosSearchFilter() {
@@ -47,12 +48,24 @@ public class UsuariosSearchFilter extends AbstractSearchFilter {
         this.text = text;
     }
 
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
     public boolean hasLoginFilter() {
         return StringUtils.isNotBlank(login);
     }
 
     public boolean hasTextFilter() {
         return StringUtils.isNotBlank(text);
+    }
+
+    public boolean hasActivoFilter() {
+        return activo != null;
     }
 
 }

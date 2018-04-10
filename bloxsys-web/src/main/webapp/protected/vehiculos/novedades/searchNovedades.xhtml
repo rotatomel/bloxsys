@@ -18,7 +18,6 @@ limitations under the License.
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
@@ -30,15 +29,72 @@ limitations under the License.
 
             <h:form id="searchUserForm">
                 <p:messages id="msgField"/>
+
+
+                <p:tabView id="filtrosTab">
+                    <p:tab id="filtrosBasicosTab" title="#{msg.filtrosBasicos}">
+                        <p:inputText id="txtBusField"
+                                     value="#{vehiculosNovedadesSearchBean.filter.text}"
+                                     placeholder="#{msg.terminosBusqueda}"/>
+                    </p:tab>
+                    <p:tab id="filtrosAvanzadosTab" title="#{msg.filtrosAvanzados}">
+                        <p:panelGrid layout="grid" style="border:0px !important; background:none;"
+                                     styleClass="ui-panelgrid-blank" columns="2">
+
+
+                            <p:outputLabel for="fechaDesdeField" value="#{msg.fechaDesde}:"/>
+                            <p:calendar id="fechaDesdeField" value="#{vehiculosNovedadesSearchBean.filter.fechaDesde}"
+                                        pattern="dd/MM/yyyy hh:mm:ss a" showButtonPanel="true"
+                                        placeholder="#{msg.fechaDesde}"/>
+
+                            <p:outputLabel for="fechaHastaField" value="#{msg.fechaHasta}:"/>
+                            <p:calendar id="fechaHastaField" value="#{vehiculosNovedadesSearchBean.filter.fechaHasta}"
+                                        pattern="dd/MM/yyyy hh:mm:ss a" showButtonPanel="true"
+                                        placeholder="#{msg.fechaHasta}"/>
+
+                            <p:outputLabel for="usuarioSearchField" value="#{msg.usuario}:"/>
+                            <p:selectOneMenu
+                                    id="usuarioSearchField"
+                                    placeholder="#{msg.usuario}"
+                                    value="#{vehiculosNovedadesSearchBean.filter.idUsuario}"
+                                    filter="true"
+                                    filterMatchMode="contains">
+
+                                <f:selectItem noSelectionOption="true"
+                                              itemLabel="#{msg.todos}"
+                                              itemValue="#{null}"/>
+
+                                <f:selectItems value="#{vehiculosNovedadesSearchBean.usuarios}"
+                                               var="usuario"
+                                               itemLabel="#{usuario.nombre}"
+                                               itemValue="#{usuario.id}"/>
+
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="vehiculoSearchField" value="#{msg.vehiculo}:"/>
+                            <p:selectOneMenu
+                                    id="vehiculoSearchField"
+                                    placeholder="#{msg.vehiculo}"
+                                    value="#{vehiculosNovedadesSearchBean.filter.idVehiculo}"
+                                    filter="true"
+                                    filterMatchMode="contains">
+
+                                <f:selectItem noSelectionOption="true"
+                                              itemLabel="#{msg.todos}"
+                                              itemValue="#{null}"/>
+
+                                <f:selectItems value="#{vehiculosNovedadesSearchBean.vehiculos}"
+                                               var="vehiculo"
+                                               itemLabel="#{vehiculo.businessString}"
+                                               itemValue="#{vehiculo.id}"/>
+
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                    </p:tab>
+                </p:tabView>
+
                 <p:panelGrid layout="grid" style="border:0px !important; background:none;"
                              styleClass="ui-panelgrid-blank" columns="2">
-
-                    <p:outputLabel value="#{msg.terminosBusqueda}:" for="txtBusField"/>
-
-                    <p:inputText id="txtBusField"
-                                 value="#{vehiculosNovedadesSearchBean.filter.text}"/>
-
-
                     <p:commandButton id="buscarButton"
                                      value="#{msg.buscar}"
                                      action="#{vehiculosNovedadesSearchBean.doSearch()}"
@@ -72,7 +128,8 @@ limitations under the License.
                              scrollable="true"
                              reflow="true">
                     <f:facet name="header">
-
+                        <p:commandButton id="toggler" type="button" value="#{msg.columnas}" icon="fa fa-fw-calculator"/>
+                        <p:columnToggler datasource="tablaUsuarios" trigger="toggler"/>
                     </f:facet>
                     <f:facet name="{Exporters}">
 
@@ -95,6 +152,7 @@ limitations under the License.
                             <i class="fa fa-file-code-o Fs24 Black"/>
                             <p:dataExporter type="xml" target="tablaUsuarios" fileName="novedades"/>
                         </h:commandLink>
+
                     </f:facet>
 
 
@@ -130,6 +188,25 @@ limitations under the License.
 
                     <p:column headerText="#{msg.usuario}" sortBy="#{item.idUsuario}">
                         <h:outputText value="#{item.idUsuario.nombre}">
+
+                        </h:outputText>
+                    </p:column>
+
+
+                    <p:column headerText="#{msg.costo}" sortBy="#{item.costo}">
+                        <h:outputText value="#{item.costo}">
+
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="#{msg.kilometrosRealizados}" sortBy="#{item.kilometrosRealizados}">
+                        <h:outputText value="#{item.kilometrosRealizados}">
+
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="#{msg.horasUso}" sortBy="#{item.horasUso}">
+                        <h:outputText value="#{item.horasUso}">
 
                         </h:outputText>
                     </p:column>

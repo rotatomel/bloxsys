@@ -78,7 +78,7 @@ public class VehiculosNovedadesEditBean implements Serializable {
     private static final Logger LOG = Logger.getLogger(VehiculosNovedadesEditBean.class.getName());
 
     /**
-     * Creates a new instance of UsuariosEditBean
+     * Creates a new instance of VehiculosNovedadesEditBean
      */
     public VehiculosNovedadesEditBean() {
     }

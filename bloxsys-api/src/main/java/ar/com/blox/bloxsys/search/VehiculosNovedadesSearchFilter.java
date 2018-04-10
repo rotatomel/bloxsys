@@ -5,9 +5,9 @@
  */
 package ar.com.blox.bloxsys.search;
 
-import java.util.Date;
-
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Date;
 
 /**
  * @author Rodrigo M. Tato Rothamel mailto:rotatomel@gmail.com
@@ -31,6 +31,11 @@ public class VehiculosNovedadesSearchFilter extends AbstractSearchFilter {
     }
 
     public VehiculosNovedadesSearchFilter() {
+    }
+
+    public VehiculosNovedadesSearchFilter(Date fechaDesde, Date fechaHasta) {
+        this.fechaDesde = fechaDesde;
+        this.fechaHasta = fechaHasta;
     }
 
     public VehiculosNovedadesSearchFilter(String text) {

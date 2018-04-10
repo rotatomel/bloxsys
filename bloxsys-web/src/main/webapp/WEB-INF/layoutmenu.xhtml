@@ -1,10 +1,9 @@
 <ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:po="http://primefaces.org/olympos">
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:po="http://primefaces.org/olympos">
 
     <h:form id="menuform">
         <po:menu>
@@ -25,7 +24,7 @@
 
                     <p:menuitem value="#{msg.choferes}" icon="fa fa-fw fa-user" action="/protected/choferes/index.xhtml?faces-redirect=true" immediate="true" ajax="false"/>
 
-                    <p:submenu id="vehiculoMenu" label="#{msg.vehiculos}" icon="fa fa-fw fa-truck" >
+                    <p:submenu id="vehiculoMenu" label="#{msg.flota}" icon="fa fa-fw fa-truck" >
                         <p:menuitem value="#{msg.vehiculos}" icon="fa fa-fw fa-truck" action="/protected/vehiculos/index.xhtml?faces-redirect=true" immediate="true" ajax="false"/>
                         <p:menuitem value="#{msg.novedades}" icon="fa fa-fw fa-file" action="/protected/vehiculos/novedades/index.xhtml?faces-redirect=true" immediate="true" ajax="false"/>
 

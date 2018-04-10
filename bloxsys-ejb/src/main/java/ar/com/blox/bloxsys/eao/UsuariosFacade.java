@@ -18,6 +18,7 @@ package ar.com.blox.bloxsys.eao;
 import ar.com.blox.bloxsys.domain.Usuario;
 import ar.com.blox.bloxsys.domain.Usuario_;
 import ar.com.blox.bloxsys.search.UsuariosSearchFilter;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,7 +27,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- *
  * @author Rodrigo M. Tato Rothamel <rotatomel@gmail.com>
  */
 @Stateless
@@ -62,6 +62,11 @@ public class UsuariosFacade extends AbstractFacade<Usuario, UsuariosSearchFilter
                 p = appendOrPredicate(cb, p, p1);
                 p = appendOrPredicate(cb, p, p2);
             }
+        }
+
+        if (usf.hasActivoFilter()) {
+            Predicate p1 = cb.equal(root.get(Usuario_.activo), usf.getActivo());
+            p = appendAndPredicate(cb, p, p1);
         }
 
         return p;
