@@ -8,6 +8,7 @@
         <class>ar.com.blox.bloxsys.domain.Chofer</class>
         <class>ar.com.blox.bloxsys.domain.Vehiculo</class>
         <class>ar.com.blox.bloxsys.domain.VehiculoNovedad</class>
+        <class>ar.com.blox.bloxsys.domain.VehiculoTipo</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>

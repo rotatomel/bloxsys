@@ -17,15 +17,9 @@ package ar.com.blox.bloxsys.domain;
  */
 
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 /**
- *
  * @author Rodrigo Tato <rotatomel@gmail.com>
  */
 @MappedSuperclass
@@ -37,7 +31,7 @@ public abstract class BaseEntity extends GTEntity<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @TableGenerator(name = "Numeraciones", table = "numeraciones", allocationSize = 1,
 //            pkColumnName = "tabla", valueColumnName = "id")
-    @Basic(optional = false)
+
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
@@ -82,4 +76,12 @@ public abstract class BaseEntity extends GTEntity<Long> {
         return null;
     }
 
+    /**
+     * Retorna la representación de la entidad para mostrar en términos del negocio.
+     *
+     * @return
+     */
+    public String getBusinessString() {
+        return String.format("[%d] %s", id, this.getClass().getName());
+    }
 }

@@ -18,7 +18,7 @@ import java.util.Date;
 @Entity
 @Table(name = "vehiculos_novedades")
 @AttributeOverride(column = @Column(name = "id_novedad"), name = "id")
-@NamedEntityGraph(name = "fullGraph",includeAllAttributes=true)
+@NamedEntityGraph(name = "fullNovedadGraph", includeAllAttributes = true)
 public class VehiculoNovedad extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

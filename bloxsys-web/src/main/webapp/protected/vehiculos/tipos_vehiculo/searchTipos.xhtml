@@ -24,34 +24,21 @@ limitations under the License.
 <div class="Container100 Responsive100 NoIndent">
     <div class="Container100 ui-fluid">
         <div class="Card">
-            <h1 class="CardBigTopic TexAlCenter">#{msg.vehiculosAdmin}</h1>
+            <h1 class="CardBigTopic TexAlCenter">#{msg.vehiculosTipos}</h1>
             <div class="SeparatorFull"/>
 
             <h:form id="searchUserForm">
                 <p:messages id="msgField"/>
                 <p:panelGrid layout="grid" style="border:0px !important; background:none;"
-                             styleClass="ui-panelgrid-blank" columns="4">
+                             styleClass="ui-panelgrid-blank" columns="2">
 
                     <p:outputLabel value="#{msg.terminosBusqueda}:" for="txtBusField"/>
 
                     <p:inputText id="txtBusField"
-                                 value="#{vehiculosSearchBean.filter.text}"/>
+                                 value="#{vehiculosTiposSearchBean.filter.text}"
+                                 placeholder="#{msg.terminosBusqueda}"
+                    />
 
-                    <p:outputLabel value="#{msg.activo}:" for="activoField"/>
-
-                    <p:selectOneMenu id="activoField" value="#{vehiculosSearchBean.filter.activo}">
-                        <f:selectItem noSelectionOption="true"
-                                      itemLabel="#{msg.todos}"
-                                      itemValue="#{null}"/>
-                        <f:selectItem
-                                itemLabel="#{msg.activo}"
-                                itemValue="#{true}"/>
-
-                        <f:selectItem
-                                itemLabel="No #{msg.activo}"
-                                itemValue="#{false}"/>
-
-                    </p:selectOneMenu>
 
                     <p:commandButton id="buscarButton"
                                      value="#{msg.buscar}"
@@ -73,7 +60,7 @@ limitations under the License.
 
 
                 <p:dataTable id="tablaUsuarios"
-                             value="#{vehiculosSearchBean.dataModel}"
+                             value="#{vehiculosTiposSearchBean.dataModel}"
                              lazy="true"
                              var="item"
                              rows="15"
@@ -92,52 +79,35 @@ limitations under the License.
 
                         <h:commandLink title="xls">
                             <i class="fa fa-file-excel-o Fs24 Green"/>
-                            <p:dataExporter type="xls" target="tablaUsuarios" fileName="vehiculos"/>
+                            <p:dataExporter type="xls" target="tablaUsuarios" fileName="tipos"/>
                         </h:commandLink>
 
                         <h:commandLink title="pdf">
                             <i class="fa fa-file-pdf-o Fs24 Red"/>
-                            <p:dataExporter type="pdf" target="tablaUsuarios" fileName="vehiculos"/>
+                            <p:dataExporter type="pdf" target="tablaUsuarios" fileName="tipos"/>
                         </h:commandLink>
 
                         <h:commandLink title="csv">
                             <i class="fa fa-file-text-o Fs24 Blue"/>
-                            <p:dataExporter type="csv" target="tablaUsuarios" fileName="vehiculos"/>
+                            <p:dataExporter type="csv" target="tablaUsuarios" fileName="tipos"/>
                         </h:commandLink>
 
                         <h:commandLink title="xml">
                             <i class="fa fa-file-code-o Fs24 Black"/>
-                            <p:dataExporter type="xml" target="tablaUsuarios" fileName="vehiculos"/>
+                            <p:dataExporter type="xml" target="tablaUsuarios" fileName="tipos"/>
                         </h:commandLink>
                     </f:facet>
 
 
-                    <p:column headerText="#{msg.dominio}" sortBy="#{item.dominio}">
-                        <h:outputText value="#{item.dominio}">
+                    <p:column headerText="#{msg.id}" sortBy="#{item.id}">
+                        <h:outputText value="#{item.id}">
 
                         </h:outputText>
                     </p:column>
-                    <p:column headerText="#{msg.marca}" sortBy="#{item.marca}">
-                        <h:outputText value="#{item.marca}">
+                    <p:column headerText="#{msg.nombre}" sortBy="#{item.nombreTipo}">
+                        <h:outputText value="#{item.nombreTipo}">
 
                         </h:outputText>
-                    </p:column>
-                    <p:column headerText="#{msg.modelo}" sortBy="#{item.modelo}">
-                        <h:outputText value="#{item.modelo}">
-
-                        </h:outputText>
-                    </p:column>
-
-                    <p:column headerText="#{msg.tipo}" sortBy="#{item.idTipoVehiculo}">
-                        <h:outputText value="#{item.idTipoVehiculo.nombreTipo}">
-
-                        </h:outputText>
-                    </p:column>
-
-                    <p:column headerText="#{msg.activo}" sortBy="#{item.activo}">
-                        <p:selectBooleanCheckbox value="#{item.activo}" disabled="true">
-
-                        </p:selectBooleanCheckbox>
                     </p:column>
 
 

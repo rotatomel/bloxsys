@@ -18,22 +18,23 @@ package ar.com.blox.bloxsys.controller.usuarios;
 import ar.com.blox.bloxsys.domain.Usuario;
 import ar.com.blox.bloxsys.eao.UsuariosFacade;
 import ar.com.blox.bloxsys.utils.JSFUtil;
-import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.commons.lang3.StringUtils;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import org.apache.commons.lang3.StringUtils;
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Controlador para el caso de uso de edición de usuarios
  *
  * @author Rodrigo M. Tato Rothamel <rotatomel@gmail.com>
- * @since 2.0.1
  * @version 1.0.0
+ * @since 2.0.1
  */
 @ManagedBean(name = "usuariosEditBean")
 @ViewScoped
@@ -112,9 +113,9 @@ public class UsuariosEditBean implements Serializable {
 
             usuarioActual.setNombre(StringUtils.trim(usuarioActual.getNombre()).toUpperCase());
             usuarioActual.setLogin(StringUtils.trim(usuarioActual.getLogin()).toLowerCase());
-            usuarioFacade.createOrEdit(usuarioActual);
+            usuarioActual = usuarioFacade.createOrEdit(usuarioActual);
             JSFUtil.getInstance().addInfoMessage(String.format("Usuario guardado exitosamente: %s", usuarioActual.getLogin()));
-
+            nuevo = false;
         } catch (Exception ex) {
             JSFUtil.getInstance().addErrorMessage(String.format("Error al guardar: %s", ex.getMessage()));
 

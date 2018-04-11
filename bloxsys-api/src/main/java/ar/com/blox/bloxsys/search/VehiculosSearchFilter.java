@@ -8,7 +8,6 @@ package ar.com.blox.bloxsys.search;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
  * @author Rodrigo M. Tato Rothamel mailto:rotatomel@gmail.com
  */
 public class VehiculosSearchFilter extends AbstractSearchFilter {
@@ -18,6 +17,8 @@ public class VehiculosSearchFilter extends AbstractSearchFilter {
     private String text;
 
     private Boolean activo;
+
+    private Long idTipoVehiculo;
 
     @Override
     public boolean hasFilter() {
@@ -68,6 +69,22 @@ public class VehiculosSearchFilter extends AbstractSearchFilter {
     }
 
     /**
+     * El ID del tipo de vehiculo
+     *
+     * @return
+     */
+    public Long getIdTipoVehiculo() {
+        return idTipoVehiculo;
+    }
+
+    /**
+     * El ID del tipo de vehiculo
+     */
+    public void setIdTipoVehiculo(Long idTipoVehiculo) {
+        this.idTipoVehiculo = idTipoVehiculo;
+    }
+
+    /**
      * Devuelve true si hay algún texto por el cual buscar
      *
      * @return
@@ -78,5 +95,14 @@ public class VehiculosSearchFilter extends AbstractSearchFilter {
 
     public boolean hasActivoFilter() {
         return activo != null;
+    }
+
+    /**
+     * Devuelve true si se ha de buscar por el tipo de vehiculo
+     *
+     * @return
+     */
+    public boolean hasTipoVehiculoFilter() {
+        return idTipoVehiculo != null;
     }
 }

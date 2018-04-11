@@ -22,12 +22,14 @@ public class VehiculosNovedadesSearchFilter extends AbstractSearchFilter {
 
     private Long idUsuario;
 
+    private Long idChofer;
+
     private Date fechaDesde, fechaHasta;
 
     @Override
     public boolean hasFilter() {
         return hasTextFilter() || hasFechasFilter()
-                || hasIdUsuarioFilter() || hasIdVehiculoFilter();
+                || hasIdUsuarioFilter() || hasIdVehiculoFilter() || hasIdChoferFilter();
     }
 
     public VehiculosNovedadesSearchFilter() {
@@ -82,6 +84,14 @@ public class VehiculosNovedadesSearchFilter extends AbstractSearchFilter {
         this.idUsuario = idUsuario;
     }
 
+    public Long getIdChofer() {
+        return idChofer;
+    }
+
+    public void setIdChofer(Long idChofer) {
+        this.idChofer = idChofer;
+    }
+
     public boolean hasTextFilter() {
         return StringUtils.isNotBlank(text);
     }
@@ -96,6 +106,10 @@ public class VehiculosNovedadesSearchFilter extends AbstractSearchFilter {
 
     public boolean hasIdUsuarioFilter() {
         return idUsuario != null;
+    }
+
+    public boolean hasIdChoferFilter() {
+        return idChofer != null;
     }
 
 }

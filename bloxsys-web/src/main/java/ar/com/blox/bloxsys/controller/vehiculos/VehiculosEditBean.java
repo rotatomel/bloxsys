@@ -16,23 +16,29 @@
 package ar.com.blox.bloxsys.controller.vehiculos;
 
 import ar.com.blox.bloxsys.domain.Vehiculo;
+import ar.com.blox.bloxsys.domain.VehiculoTipo;
 import ar.com.blox.bloxsys.eao.VehiculosFacade;
+import ar.com.blox.bloxsys.eao.VehiculosTiposFacade;
+import ar.com.blox.bloxsys.search.BasicTextSearchFilter;
 import ar.com.blox.bloxsys.utils.JSFUtil;
-import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Controlador para el caso de uso de edición de usuarios
  *
  * @author Rodrigo M. Tato Rothamel <rotatomel@gmail.com>
- * @since 2.0.1
  * @version 1.0.0
+ * @since 2.0.1
  */
 @ManagedBean(name = "vehiculosEditBean")
 @ViewScoped
@@ -45,6 +51,12 @@ public class VehiculosEditBean implements Serializable {
 
     @EJB
     private VehiculosFacade vehiculosFacade;
+
+
+    @EJB
+    private VehiculosTiposFacade tiposFacade;
+
+    private List<VehiculoTipo> tipos = null;
 
     private Vehiculo vehiculoActual;
 
@@ -98,14 +110,14 @@ public class VehiculosEditBean implements Serializable {
     }
 
     public void doGuardarVehiculo() {
-        if (!validarChofer()) {
+        if (!validar()) {
             return;
         }
         try {
 
-            vehiculosFacade.createOrEdit(vehiculoActual);
+            vehiculoActual = vehiculosFacade.createOrEdit(vehiculoActual);
             JSFUtil.getInstance().addInfoMessage(String.format("Vehículo guardado exitosamente: %s", vehiculoActual.getId()));
-
+            nuevo = false;
         } catch (Exception ex) {
             JSFUtil.getInstance().addErrorMessage(String.format("Error al guardar: %s", ex.getMessage()));
 
@@ -118,6 +130,7 @@ public class VehiculosEditBean implements Serializable {
         try {
             vehiculosFacade.remove(vehiculoActual);
             vehiculoActual = null;
+
             JSFUtil.getInstance().addInfoMessage("Vehículo eliminado exitosamente!");
 
         } catch (Exception ex) {
@@ -127,7 +140,7 @@ public class VehiculosEditBean implements Serializable {
         }
     }
 
-    private boolean validarChofer() {
+    private boolean validar() {
         boolean validacionCorrecta = true;
         if (vehiculoActual == null) {
             validacionCorrecta = false;
@@ -137,4 +150,18 @@ public class VehiculosEditBean implements Serializable {
         return validacionCorrecta;
     }
 
+    /**
+     * La lista de posibles tipos de vehículos
+     *
+     * @return
+     */
+    public List<VehiculoTipo> getTipos() {
+        if (tipos == null) {
+            tipos = new ArrayList<>();
+            BasicTextSearchFilter sf = new BasicTextSearchFilter();
+            sf.addSortField("nombreTipo", true);
+            tipos.addAll(tiposFacade.findAllBySearchFilter(sf));
+        }
+        return tipos;
+    }
 }

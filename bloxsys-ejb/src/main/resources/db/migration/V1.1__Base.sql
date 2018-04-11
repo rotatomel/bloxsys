@@ -48,6 +48,21 @@ CREATE TABLE IF NOT EXISTS `choferes` (
   UNIQUE KEY `chofer_cuil_UNIQUE` (`cuil`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `vehiculos_tipos`;
+CREATE TABLE IF NOT EXISTS `vehiculos_tipos` (
+  `id_tipo_vehiculo` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_tipo` varchar(45) NOT NULL,
+  `version` integer not null default 0,
+  PRIMARY KEY (`id_tipo_vehiculo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `vehiculos_tipos` (`nombre_tipo`) VALUES ('FURGON');
+INSERT INTO `vehiculos_tipos` (`nombre_tipo`) VALUES ('CAMIONETA');
+INSERT INTO `vehiculos_tipos` (`nombre_tipo`) VALUES ('AUTOELEVADOR');
+INSERT INTO `vehiculos_tipos` (`nombre_tipo`) VALUES ('CAMION');
+INSERT INTO `vehiculos_tipos` (`nombre_tipo`) VALUES ('AUTOMOVIL');
+
+
 DROP TABLE IF EXISTS `vehiculos`;
 CREATE TABLE IF NOT EXISTS `vehiculos` (
   `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT,
@@ -59,10 +74,13 @@ CREATE TABLE IF NOT EXISTS `vehiculos` (
   `fecha_compra` date NOT NULL,
   `capacidad_carga` int(11),
   `observaciones` text,
+  `id_tipo_vehiculo` int(11) not null
   `activo` tinyint(1) not null DEFAULT '1',
   `version` integer not null default 0,
   PRIMARY KEY (`id_vehiculo`),
-  UNIQUE KEY `vehiculo_dominio_UNIQUE` (`dominio`)
+  UNIQUE KEY `vehiculo_dominio_UNIQUE` (`dominio`),
+  CONSTRAINT `fk_vehiculos_id_tipo_vehiculo` FOREIGN KEY (`id_tipo_vehiculo`) REFERENCES `vehiculos_tipos` (`id_tipo_vehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

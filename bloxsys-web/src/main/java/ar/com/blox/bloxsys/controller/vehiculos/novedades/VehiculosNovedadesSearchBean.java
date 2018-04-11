@@ -15,13 +15,12 @@
  */
 package ar.com.blox.bloxsys.controller.vehiculos.novedades;
 
+import ar.com.blox.bloxsys.domain.Chofer;
 import ar.com.blox.bloxsys.domain.Usuario;
 import ar.com.blox.bloxsys.domain.Vehiculo;
 import ar.com.blox.bloxsys.domain.VehiculoNovedad;
-import ar.com.blox.bloxsys.eao.AbstractFacade;
-import ar.com.blox.bloxsys.eao.UsuariosFacade;
-import ar.com.blox.bloxsys.eao.VehiculosFacade;
-import ar.com.blox.bloxsys.eao.VehiculosNovedadesFacade;
+import ar.com.blox.bloxsys.eao.*;
+import ar.com.blox.bloxsys.search.ChoferesSearchFilter;
 import ar.com.blox.bloxsys.search.UsuariosSearchFilter;
 import ar.com.blox.bloxsys.search.VehiculosNovedadesSearchFilter;
 import ar.com.blox.bloxsys.search.VehiculosSearchFilter;
@@ -63,9 +62,14 @@ public class VehiculosNovedadesSearchBean extends AbstractSearchBean<VehiculoNov
     @EJB
     private UsuariosFacade usuariosFacade;
 
+    @EJB
+    private ChoferesFacade choferesFacade;
+
     private List<Usuario> usuarios = null;
 
     private List<Vehiculo> vehiculos = null;
+
+    private List<Chofer> choferes = null;
 
     /**
      * Creates a new instance of VehiculosNovedadesSearchBean
@@ -86,7 +90,7 @@ public class VehiculosNovedadesSearchBean extends AbstractSearchBean<VehiculoNov
     @Override
     protected void prepareSearchFilter() {
         if (!filter.hasNamedEntityGraph()) {
-            filter.setNamedEntityGraph("fullGraph");
+            filter.setNamedEntityGraph("fullNovedadGraph");
         }
 
         if (!filter.hasOrderFields()) {
@@ -112,6 +116,7 @@ public class VehiculosNovedadesSearchBean extends AbstractSearchBean<VehiculoNov
 
     /**
      * Obtiene la lista de vehículos activos
+     *
      * @return
      */
     public List<Vehiculo> getVehiculos() {
@@ -122,5 +127,23 @@ public class VehiculosNovedadesSearchBean extends AbstractSearchBean<VehiculoNov
             vehiculos.addAll(vehiculosFacade.findAllBySearchFilter(vsf));
         }
         return vehiculos;
+    }
+
+    /**
+     * Devuelve la lista de choferes activos
+     *
+     * @return
+     */
+    public List<Chofer> getChoferes() {
+        if (choferes == null) {
+            choferes = new ArrayList<>();
+            ChoferesSearchFilter csf = new ChoferesSearchFilter();
+            csf.setActivo(true);
+            csf.addSortField("apellidos", true);
+            csf.addSortField("nombres", true);
+            choferes.addAll(choferesFacade.findAllBySearchFilter(csf));
+
+        }
+        return choferes;
     }
 }

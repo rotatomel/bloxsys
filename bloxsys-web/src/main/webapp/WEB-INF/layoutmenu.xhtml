@@ -25,6 +25,9 @@
                     <p:menuitem value="#{msg.choferes}" icon="fa fa-fw fa-user" action="/protected/choferes/index.xhtml?faces-redirect=true" immediate="true" ajax="false"/>
 
                     <p:submenu id="vehiculoMenu" label="#{msg.flota}" icon="fa fa-fw fa-truck" >
+                        <p:menuitem value="#{msg.vehiculosTipos}" icon="fa fa-fw fa-car"
+                                    action="/protected/vehiculos/tipos_vehiculo/index.xhtml?faces-redirect=true"
+                                    immediate="true" ajax="false"/>
                         <p:menuitem value="#{msg.vehiculos}" icon="fa fa-fw fa-truck" action="/protected/vehiculos/index.xhtml?faces-redirect=true" immediate="true" ajax="false"/>
                         <p:menuitem value="#{msg.novedades}" icon="fa fa-fw fa-file" action="/protected/vehiculos/novedades/index.xhtml?faces-redirect=true" immediate="true" ajax="false"/>
 

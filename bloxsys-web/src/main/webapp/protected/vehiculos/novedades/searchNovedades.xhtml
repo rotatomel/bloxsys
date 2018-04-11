@@ -31,7 +31,7 @@ limitations under the License.
                 <p:messages id="msgField"/>
 
 
-                <p:tabView id="filtrosTab">
+                <p:tabView id="filtrosTab" dynamic="true">
                     <p:tab id="filtrosBasicosTab" title="#{msg.filtrosBasicos}">
                         <p:inputText id="txtBusField"
                                      value="#{vehiculosNovedadesSearchBean.filter.text}"
@@ -87,6 +87,25 @@ limitations under the License.
                                                var="vehiculo"
                                                itemLabel="#{vehiculo.businessString}"
                                                itemValue="#{vehiculo.id}"/>
+
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="choferSearchField" value="#{msg.chofer}:"/>
+                            <p:selectOneMenu
+                                    id="choferSearchField"
+                                    placeholder="#{msg.chofer}"
+                                    value="#{vehiculosNovedadesSearchBean.filter.idChofer}"
+                                    filter="true"
+                                    filterMatchMode="contains">
+
+                                <f:selectItem noSelectionOption="true"
+                                              itemLabel="#{msg.todos}"
+                                              itemValue="#{null}"/>
+
+                                <f:selectItems value="#{vehiculosNovedadesSearchBean.choferes}"
+                                               var="chofer"
+                                               itemLabel="#{chofer.businessString}"
+                                               itemValue="#{chofer.id}"/>
 
                             </p:selectOneMenu>
                         </p:panelGrid>
@@ -188,6 +207,12 @@ limitations under the License.
 
                     <p:column headerText="#{msg.usuario}" sortBy="#{item.idUsuario}">
                         <h:outputText value="#{item.idUsuario.nombre}">
+
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="#{msg.chofer}" sortBy="#{item.idChofer}">
+                        <h:outputText value="#{item.idChofer.businessString}">
 
                         </h:outputText>
                     </p:column>

@@ -5,17 +5,12 @@
  */
 package ar.com.blox.bloxsys.domain;
 
-import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 /**
  * Entidad de Vehiculo
@@ -25,6 +20,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "vehiculos")
 @AttributeOverride(column = @Column(name = "id_vehiculo"), name = "id")
+@NamedEntityGraph(name = "fullVehiculoGraph", includeAllAttributes = true)
 public class Vehiculo extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -64,6 +60,11 @@ public class Vehiculo extends BaseEntity {
     @NotNull
     @Column(name = "activo")
     private Boolean activo;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_vehiculo", referencedColumnName = "id_tipo_vehiculo")
+    private VehiculoTipo idTipoVehiculo;
 
     public String getDominio() {
         return dominio;
@@ -137,11 +138,15 @@ public class Vehiculo extends BaseEntity {
         this.nroMotor = nroMotor;
     }
 
-    /**
-     * Obtiene la representación en String según las necesidades del negocio
-     *
-     * @return
-     */
+    public VehiculoTipo getIdTipoVehiculo() {
+        return idTipoVehiculo;
+    }
+
+    public void setIdTipoVehiculo(VehiculoTipo idTipoVehiculo) {
+        this.idTipoVehiculo = idTipoVehiculo;
+    }
+
+    @Override
     public String getBusinessString() {
         return String.format("[%s] %s - %s", dominio, marca, modelo);
     }

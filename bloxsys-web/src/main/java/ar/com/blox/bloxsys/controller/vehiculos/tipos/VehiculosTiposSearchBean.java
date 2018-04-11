@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ar.com.blox.bloxsys.controller.vehiculos;
+package ar.com.blox.bloxsys.controller.vehiculos.tipos;
 
-import ar.com.blox.bloxsys.domain.Vehiculo;
+import ar.com.blox.bloxsys.domain.VehiculoTipo;
 import ar.com.blox.bloxsys.eao.AbstractFacade;
-import ar.com.blox.bloxsys.eao.VehiculosFacade;
-import ar.com.blox.bloxsys.search.VehiculosSearchFilter;
+import ar.com.blox.bloxsys.eao.VehiculosTiposFacade;
+import ar.com.blox.bloxsys.search.BasicTextSearchFilter;
 import ar.com.blox.bloxsys.ui.search.AbstractSearchBean;
 
 import javax.ejb.EJB;
@@ -26,49 +26,46 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 /**
- * Bean para búsqueda de vehiculos
+ * Bean para búsqueda de tipos de vehiculos
  *
  * @author Rodrigo M. Tato Rothamel mailto:rotatomel@gmail.com
  */
-@ManagedBean(name = "vehiculosSearchBean")
+@ManagedBean(name = "vehiculosTiposSearchBean")
 @ViewScoped
-public class VehiculosSearchBean extends AbstractSearchBean<Vehiculo, VehiculosSearchFilter> {
+public class VehiculosTiposSearchBean extends AbstractSearchBean<VehiculoTipo, BasicTextSearchFilter> {
 
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
-    private final VehiculosSearchFilter filter = new VehiculosSearchFilter();
+    private final BasicTextSearchFilter filter = new BasicTextSearchFilter();
 
     @EJB
-    private VehiculosFacade vehiculosFacade;
+    private VehiculosTiposFacade tiposFacade;
 
     /**
      * Creates a new instance of VehiculosTiposSearchBean
      */
-    public VehiculosSearchBean() {
+    public VehiculosTiposSearchBean() {
     }
 
     @Override
-    public VehiculosSearchFilter getFilter() {
+    public BasicTextSearchFilter getFilter() {
         return filter;
     }
 
     @Override
-    protected AbstractFacade<Vehiculo, VehiculosSearchFilter> getFacade() {
-        return vehiculosFacade;
+    protected AbstractFacade<VehiculoTipo, BasicTextSearchFilter> getFacade() {
+        return tiposFacade;
     }
 
     @Override
     protected void prepareSearchFilter() {
         if (!filter.hasOrderFields()) {
-            filter.addSortField("dominio", true);
+            filter.addSortField("nombreTipo", true);
         }
 
-        if (!filter.hasNamedEntityGraph()) {
-            filter.setNamedEntityGraph("fullVehiculoGraph");
-        }
     }
 
 }

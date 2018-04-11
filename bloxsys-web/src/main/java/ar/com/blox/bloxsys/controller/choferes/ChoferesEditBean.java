@@ -18,21 +18,22 @@ package ar.com.blox.bloxsys.controller.choferes;
 import ar.com.blox.bloxsys.domain.Chofer;
 import ar.com.blox.bloxsys.eao.ChoferesFacade;
 import ar.com.blox.bloxsys.utils.JSFUtil;
-import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Controlador para el caso de uso de edición de usuarios
  *
  * @author Rodrigo M. Tato Rothamel <rotatomel@gmail.com>
- * @since 2.0.1
  * @version 1.0.0
+ * @since 2.0.1
  */
 @ManagedBean(name = "choferesEditBean")
 @ViewScoped
@@ -103,8 +104,9 @@ public class ChoferesEditBean implements Serializable {
         }
         try {
 
-            choferesFacade.createOrEdit(choferActual);
+            choferActual = choferesFacade.createOrEdit(choferActual);
             JSFUtil.getInstance().addInfoMessage(String.format("Chofer guardado exitosamente: %s", choferActual.getId()));
+            nuevo = false;
 
         } catch (Exception ex) {
             JSFUtil.getInstance().addErrorMessage(String.format("Error al guardar: %s", ex.getMessage()));

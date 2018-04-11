@@ -15,10 +15,7 @@
  */
 package ar.com.blox.bloxsys.eao;
 
-import ar.com.blox.bloxsys.domain.Usuario_;
-import ar.com.blox.bloxsys.domain.VehiculoNovedad;
-import ar.com.blox.bloxsys.domain.VehiculoNovedad_;
-import ar.com.blox.bloxsys.domain.Vehiculo_;
+import ar.com.blox.bloxsys.domain.*;
 import ar.com.blox.bloxsys.search.VehiculosNovedadesSearchFilter;
 
 import javax.ejb.Stateless;
@@ -80,6 +77,11 @@ public class VehiculosNovedadesFacade extends AbstractFacade<VehiculoNovedad, Ve
 
         if (vnsf.hasFechasFilter()) {
             Predicate p1 = cb.between(root.get(VehiculoNovedad_.fechaNovedad), vnsf.getFechaDesde(), vnsf.getFechaHasta());
+            p = appendAndPredicate(cb, p, p1);
+        }
+
+        if (vnsf.hasIdChoferFilter()) {
+            Predicate p1 = cb.equal(root.get(VehiculoNovedad_.idChofer).get(Chofer_.id), vnsf.getIdChofer());
             p = appendAndPredicate(cb, p, p1);
         }
 

@@ -16,8 +16,10 @@
 package ar.com.blox.bloxsys.eao;
 
 import ar.com.blox.bloxsys.domain.Vehiculo;
+import ar.com.blox.bloxsys.domain.VehiculoTipo_;
 import ar.com.blox.bloxsys.domain.Vehiculo_;
 import ar.com.blox.bloxsys.search.VehiculosSearchFilter;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,7 +28,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- *
  * @author Rodrigo M. Tato Rothamel <rotatomel@gmail.com>
  */
 @Stateless
@@ -67,6 +68,11 @@ public class VehiculosFacade extends AbstractFacade<Vehiculo, VehiculosSearchFil
 
         if (vsf.hasActivoFilter()) {
             Predicate p1 = cb.equal(root.get(Vehiculo_.activo), vsf.getActivo());
+            p = appendAndPredicate(cb, p, p1);
+        }
+
+        if (vsf.hasTipoVehiculoFilter()) {
+            Predicate p1 = cb.equal(root.get(Vehiculo_.idTipoVehiculo).get(VehiculoTipo_.id), vsf.getIdTipoVehiculo());
             p = appendAndPredicate(cb, p, p1);
         }
 
