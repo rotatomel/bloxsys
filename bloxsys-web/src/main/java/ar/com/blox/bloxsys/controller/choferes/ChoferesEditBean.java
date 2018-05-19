@@ -16,7 +16,10 @@
 package ar.com.blox.bloxsys.controller.choferes;
 
 import ar.com.blox.bloxsys.domain.Chofer;
+import ar.com.blox.bloxsys.domain.Usuario;
 import ar.com.blox.bloxsys.eao.ChoferesFacade;
+import ar.com.blox.bloxsys.eao.UsuariosFacade;
+import ar.com.blox.bloxsys.search.UsuariosSearchFilter;
 import ar.com.blox.bloxsys.utils.JSFUtil;
 
 import javax.annotation.PostConstruct;
@@ -25,6 +28,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,6 +53,11 @@ public class ChoferesEditBean implements Serializable {
     private ChoferesFacade choferesFacade;
 
     private Chofer choferActual;
+
+    @EJB
+    private UsuariosFacade usuariosFacade;
+
+    private List<Usuario> usuarios = null;
 
     private boolean nuevo = false;
 
@@ -137,6 +147,21 @@ public class ChoferesEditBean implements Serializable {
         }
 //TODO: validar el CUIL por ejemplo...
         return validacionCorrecta;
+    }
+
+    /**
+     * Obtiene la lista de usuarios activos
+     *
+     * @return
+     */
+    public List<Usuario> getUsuarios() {
+        if (usuarios == null) {
+            usuarios = new ArrayList<>();
+            UsuariosSearchFilter usf = new UsuariosSearchFilter();
+            usf.setActivo(true);
+            usuarios.addAll(usuariosFacade.findAllBySearchFilter(usf));
+        }
+        return usuarios;
     }
 
 }

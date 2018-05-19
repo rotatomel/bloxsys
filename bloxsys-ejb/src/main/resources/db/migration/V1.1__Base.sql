@@ -43,9 +43,12 @@ CREATE TABLE IF NOT EXISTS `choferes` (
   `fecha_ingreso` date NOT NULL,
   `fecha_vencimiento_licencia` date NOT NULL,
   `activo` tinyint(1) not null DEFAULT '1',
+  `email` varchar(45) ,
+  `id_supervisor` int(11) NOT NULL,
   `version` integer not null default 0,
   PRIMARY KEY (`id_chofer`),
-  UNIQUE KEY `chofer_cuil_UNIQUE` (`cuil`)
+  UNIQUE KEY `chofer_cuil_UNIQUE` (`cuil`),
+  CONSTRAINT `fk_choferes_usuario` FOREIGN KEY (`id_supervisor`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `vehiculos_tipos`;

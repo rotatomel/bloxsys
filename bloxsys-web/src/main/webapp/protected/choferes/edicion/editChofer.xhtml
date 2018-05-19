@@ -14,135 +14,170 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      >
+>
 
-    <div class="Container100 Responsive100 NoIndent">
-        <div class="Container100 ui-fluid">
-            <div class="Card">
-                <h1 class="CardBigTopic TexAlCenter">#{msg.choferesEditar}</h1>
-                <div class="SeparatorFull" />
+<div class="Container100 Responsive100 NoIndent">
+    <div class="Container100 ui-fluid">
+        <div class="Card">
+            <h1 class="CardBigTopic TexAlCenter">#{msg.choferesEditar}</h1>
+            <div class="SeparatorFull"/>
 
-                <h:form id="userEditForm">
-
-
-                    <p:panelGrid layout="grid"  styleClass="ui-panelgrid-blank" columns="2" >
-                        <!-- CUIL -->
-                        <p:outputLabel value="#{msg.cuil}:" for="cuilField"/>
-
-                        <p:inputText id="cuilField"
-                                     value="#{choferesEditBean.choferActual.cuil}"
-                                     required="true"
-                                     label="#{msg.cuil}"
-                                     maxlength="11">
-                            <f:validateLongRange minimum="11111111111" maximum="99999999999" />
-                        </p:inputText>
-
-                        <!-- Apellidos -->
-                        <p:outputLabel value="#{msg.apellidos}:" for="apellidosField"/>
-
-                        <p:inputText id="apellidosField"
-                                     label="#{msg.apellidos}"
-                                     value="#{choferesEditBean.choferActual.apellidos}"
-                                     required="true"
-                                     maxlength="45"
-                                     converter="#{stringFormatConverter}"
-                                     />
-                        <!-- Nombres -->
-                        <p:outputLabel value="#{msg.nombres}:" for="nombresField"/>
-
-                        <p:inputText id="nombresField"
-                                     label="#{msg.nombres}"
-                                     value="#{choferesEditBean.choferActual.nombres}"
-                                     required="true"
-                                     maxlength="45"
-                                     converter="#{stringFormatConverter}"
-                                     />
-                        <!-- Direccion -->
-                        <p:outputLabel value="#{msg.direccion}:" for="direccionField"/>
-                        <p:inputText id="direccionField"
-                                     label="#{msg.direccion}"
-                                     value="#{choferesEditBean.choferActual.direccion}"
-                                     required="true"
-                                     maxlength="255"
-                                     converter="#{stringFormatConverter}">
-
-                        </p:inputText>
-                        <!-- Celular Personal -->
-                        <p:outputLabel value="#{msg.celularPersonal}:" for="celularPersonalField"/>
-                        <p:inputText id="celularPersonalField"
-                                     label="#{msg.celularPersonal}"
-                                     value="#{choferesEditBean.choferActual.celularPersonal}"
-                                     required="true"
-                                     maxlength="255"
-                                     converter="#{stringFormatConverter}">
-
-                        </p:inputText>
-                        <!-- Celular Corporativo -->
-                        <p:outputLabel value="#{msg.celularCorporativo}:" for="celularCorporativoField"/>
-                        <p:inputText id="celularCorporativoField"
-                                     label="#{msg.celularCorporativo}"
-                                     value="#{choferesEditBean.choferActual.celularCorporativo}"
-                                     required="true"
-                                     maxlength="255"
-                                     converter="#{stringFormatConverter}">
-
-                        </p:inputText>
-                        <!-- Fecha ingreso -->
-                        <p:outputLabel value="#{msg.fechaIngreso}:" for="fechaIngresoField"/>
-                        <p:calendar id="fechaIngresoField" value="#{choferesEditBean.choferActual.fechaIngreso}" required="true"
-                                    pattern="dd/MM/yyyy"/>
-                        <!-- Fecha Vencimiento de licencia -->
-                        <p:outputLabel value="#{msg.fechaVencLicencia}:" for="fechaVencLicenciaField"/>
-                        <p:calendar id="fechaVencLicenciaField" value="#{choferesEditBean.choferActual.fechaVencimientoLicencia}"
-                                    required="true"
-                                    pattern="dd/MM/yyyy"/>
-
-                        <!--Activo-->
-
-                        <h:outputLabel for="activoField" value="#{msg.activo}:"/>
-                        <p:selectBooleanCheckbox id="activoField" value="#{choferesEditBean.choferActual.activo}"
-                                                 required="true"/>
-
-                    </p:panelGrid >
-                    <p:separator/>
-                    <!-- Botones de guardar y cancelar-->
-                    <p:panelGrid layout="grid"  styleClass="ui-panelgrid-blank" columns="4" >
-                        <p:commandButton id="guardarButton"
-                                         value="#{msg.guardar}"
-                                         action="#{choferesEditBean.doGuardarChofer()}"
-                                         update="@form"
-                                         ajax="true"
-                                         icon="fa fa-fw fa-save"
-                                         styleClass="GreenButton"/>
-
-                        <p:commandButton id="eliminarButton"
-                                         value="#{msg.borrar}"
-                                         action="#{choferesEditBean.doEliminarChofer()}"
-                                         update="@form"
-                                         ajax="true"
-                                         rendered="#{not choferesEditBean.nuevo}"
-                                         icon="fa fa-fw fa-trash"
-                                         styleClass="RedButton"/>
+            <h:form id="userEditForm">
 
 
-                        <p:commandButton id="cancelarButton"
-                                         value="#{msg.cancelar}"
-                                         action="/protected/choferes/index.xhtml?faces-redirect=true"
-                                         ajax="false"
-                                         immediate="true"
-                                         icon="fa fa-fw fa-ban"
-                                         />
-                    </p:panelGrid >
+                <p:panelGrid layout="grid" styleClass="ui-panelgrid-blank" columns="2">
+                    <!-- CUIL -->
+                    <p:outputLabel value="#{msg.cuil}:" for="cuilField"/>
 
-                </h:form>
-            </div>
+                    <p:inputText id="cuilField"
+                                 value="#{choferesEditBean.choferActual.cuil}"
+                                 required="true"
+                                 label="#{msg.cuil}"
+                                 maxlength="11">
+                        <f:validateLongRange minimum="11111111111" maximum="99999999999"/>
+                    </p:inputText>
+
+                    <!-- Apellidos -->
+                    <p:outputLabel value="#{msg.apellidos}:" for="apellidosField"/>
+
+                    <p:inputText id="apellidosField"
+                                 label="#{msg.apellidos}"
+                                 value="#{choferesEditBean.choferActual.apellidos}"
+                                 required="true"
+                                 maxlength="45"
+                                 converter="#{stringFormatConverter}"
+                    />
+                    <!-- Nombres -->
+                    <p:outputLabel value="#{msg.nombres}:" for="nombresField"/>
+
+                    <p:inputText id="nombresField"
+                                 label="#{msg.nombres}"
+                                 value="#{choferesEditBean.choferActual.nombres}"
+                                 required="true"
+                                 maxlength="45"
+                                 converter="#{stringFormatConverter}"
+                    />
+                    <!-- Direccion -->
+                    <p:outputLabel value="#{msg.direccion}:" for="direccionField"/>
+                    <p:inputText id="direccionField"
+                                 label="#{msg.direccion}"
+                                 value="#{choferesEditBean.choferActual.direccion}"
+                                 required="true"
+                                 maxlength="255"
+                                 converter="#{stringFormatConverter}">
+
+                    </p:inputText>
+                    <!-- Celular Personal -->
+                    <p:outputLabel value="#{msg.celularPersonal}:" for="celularPersonalField"/>
+                    <p:inputText id="celularPersonalField"
+                                 label="#{msg.celularPersonal}"
+                                 value="#{choferesEditBean.choferActual.celularPersonal}"
+                                 required="true"
+                                 maxlength="255"
+                                 converter="#{stringFormatConverter}">
+
+                    </p:inputText>
+                    <!-- Celular Corporativo -->
+                    <p:outputLabel value="#{msg.celularCorporativo}:" for="celularCorporativoField"/>
+                    <p:inputText id="celularCorporativoField"
+                                 label="#{msg.celularCorporativo}"
+                                 value="#{choferesEditBean.choferActual.celularCorporativo}"
+                                 required="true"
+                                 maxlength="255"
+                                 converter="#{stringFormatConverter}">
+
+                    </p:inputText>
+                    <!-- Fecha ingreso -->
+                    <p:outputLabel value="#{msg.fechaIngreso}:" for="fechaIngresoField"/>
+                    <p:calendar id="fechaIngresoField" value="#{choferesEditBean.choferActual.fechaIngreso}"
+                                required="true"
+                                pattern="dd/MM/yyyy"/>
+                    <!-- Fecha Vencimiento de licencia -->
+                    <p:outputLabel value="#{msg.fechaVencLicencia}:" for="fechaVencLicenciaField"/>
+                    <p:calendar id="fechaVencLicenciaField"
+                                value="#{choferesEditBean.choferActual.fechaVencimientoLicencia}"
+                                required="true"
+                                pattern="dd/MM/yyyy"/>
+
+                    <!-- Email -->
+                    <p:outputLabel value="#{msg.email}:" for="emailField"/>
+                    <p:inputText id="emailField"
+                                 label="#{msg.email}"
+                                 value="#{choferesEditBean.choferActual.email}"
+                                 required="false"
+                                 maxlength="45">
+                        <f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)"/>
+                    </p:inputText>
+
+                    <!--Supervisor-->
+                    <p:outputLabel for="supervisorField" value="#{msg.supervisor}:"/>
+                    <p:selectOneMenu
+                            id="supervisorField"
+                            placeholder="#{msg.supervisor}"
+                            value="#{choferesEditBean.choferActual.supervisor}"
+                            filter="true"
+                            required="true"
+                            filterMatchMode="contains"
+                            converter="omnifaces.SelectItemsIndexConverter">
+
+
+                        <f:selectItem noSelectionOption="true"
+                                      itemLabel="#{msg.seleccionarUno}"
+                                      itemValue="#{null}"/>
+
+                        <f:selectItems value="#{choferesEditBean.usuarios}"
+                                       var="usuario"
+                                       itemLabel="#{usuario.nombre}"
+                                       itemValue="#{usuario}"/>
+
+                    </p:selectOneMenu>
+
+                    <!--Activo-->
+
+                    <h:outputLabel for="activoField" value="#{msg.activo}:"/>
+                    <p:selectBooleanCheckbox id="activoField" value="#{choferesEditBean.choferActual.activo}"
+                                             required="true"/>
+
+                </p:panelGrid>
+                <p:separator/>
+                <!-- Botones de guardar y cancelar-->
+                <p:panelGrid layout="grid" styleClass="ui-panelgrid-blank" columns="4">
+                    <p:commandButton id="guardarButton"
+                                     value="#{msg.guardar}"
+                                     action="#{choferesEditBean.doGuardarChofer()}"
+                                     update="@form"
+                                     ajax="true"
+                                     icon="fa fa-fw fa-save"
+                                     styleClass="GreenButton"/>
+
+                    <p:commandButton id="eliminarButton"
+                                     value="#{msg.borrar}"
+                                     action="#{choferesEditBean.doEliminarChofer()}"
+                                     update="@form"
+                                     ajax="true"
+                                     rendered="#{not choferesEditBean.nuevo}"
+                                     icon="fa fa-fw fa-trash"
+                                     styleClass="RedButton"/>
+
+
+                    <p:commandButton id="cancelarButton"
+                                     value="#{msg.cancelar}"
+                                     action="/protected/choferes/index.xhtml?faces-redirect=true"
+                                     ajax="false"
+                                     immediate="true"
+                                     icon="fa fa-fw fa-ban"
+                    />
+                </p:panelGrid>
+
+            </h:form>
         </div>
     </div>
+</div>
 
 </html>

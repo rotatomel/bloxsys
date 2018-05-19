@@ -18,30 +18,20 @@ package ar.com.blox.bloxsys.eao;
 import ar.com.blox.bloxsys.domain.GTEntity;
 import ar.com.blox.bloxsys.search.AbstractSearchFilter;
 import ar.com.blox.bloxsys.search.SortField;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -168,7 +158,7 @@ public abstract class AbstractFacade<T extends GTEntity<?>, S extends AbstractSe
         Map<String, Object> hints = createHints(sf);
 
         if (!hints.isEmpty()) {
-            hints.forEach((x, y) -> q.setHint(x, y));
+            hints.forEach(q::setHint);
         }
         List<T> resultList = q.getResultList();
         return resultList;

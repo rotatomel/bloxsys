@@ -2,6 +2,7 @@ package ar.com.blox.bloxsys.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -46,6 +47,16 @@ public class Chofer extends BaseEntity {
     @Column(name = "fecha_vencimiento_licencia")
     @Temporal(TemporalType.DATE)
     private Date fechaVencimientoLicencia;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "id_supervisor", referencedColumnName = "id_usuario")
+    private Usuario supervisor;
+
+    @Column(name = "email")
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "El email debe tener el formato correcto.")
+    private String email;
+
 
     public String getApellidos() {
         return apellidos;
@@ -117,6 +128,42 @@ public class Chofer extends BaseEntity {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    /**
+     * El usuario que es responsable de supervisar al chofer y recibir las notificaciones.
+     *
+     * @return
+     */
+    public Usuario getSupervisor() {
+        return supervisor;
+    }
+
+    /**
+     * El usuario que es responsable de supervisar al chofer y recibir las notificaciones.
+     *
+     * @param supervisor
+     */
+    public void setSupervisor(Usuario supervisor) {
+        this.supervisor = supervisor;
+    }
+
+    /**
+     * El email en el que el chofer puede recibir las notificaciones
+     *
+     * @return
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * El email en el que el chofer puede recibir las notificaciones
+     *
+     * @param email
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
