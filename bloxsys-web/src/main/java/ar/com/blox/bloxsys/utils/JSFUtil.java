@@ -15,12 +15,6 @@
  */
 package ar.com.blox.bloxsys.utils;
 
-import java.io.IOException;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.activation.MimetypesFileTypeMap;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
@@ -33,6 +27,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Utility Bean for JSF.
@@ -172,6 +172,15 @@ public class JSFUtil {
      */
     public void addInfoMessage(String localizedMessage) {
         addMessage(localizedMessage, FacesMessage.SEVERITY_INFO);
+    }
+
+    /**
+     * Muestra un mensaje informativo
+     *
+     * @param localizedMessage
+     */
+    public void addWarningMessage(String localizedMessage) {
+        addMessage(localizedMessage, FacesMessage.SEVERITY_WARN);
     }
 
     /**

@@ -18,6 +18,7 @@ package ar.com.blox.bloxsys.eao;
 import ar.com.blox.bloxsys.domain.Chofer;
 import ar.com.blox.bloxsys.domain.Chofer_;
 import ar.com.blox.bloxsys.search.ChoferesSearchFilter;
+import org.apache.commons.lang3.time.DateUtils;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,6 +26,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.Date;
 
 /**
  * @author Rodrigo M. Tato Rothamel <rotatomel@gmail.com>
@@ -72,6 +74,14 @@ public class ChoferesFacade extends AbstractFacade<Chofer, ChoferesSearchFilter>
             Predicate p1 = cb.equal(root.get(Chofer_.activo), csf.getActivo());
             p = appendAndPredicate(cb, p, p1);
         }
+
+        if (csf.hasDiasLicenciaProximaVencer()) {
+            Date hoy = new Date();
+            Date fechaLimite = DateUtils.addDays(hoy, csf.getDiasLicenciaProximaVencer());
+            Predicate p1 = cb.between(root.get(Chofer_.fechaVencimientoLicencia), hoy, fechaLimite);
+            p = appendAndPredicate(cb, p, p1);
+        }
+
 
         return p;
     }

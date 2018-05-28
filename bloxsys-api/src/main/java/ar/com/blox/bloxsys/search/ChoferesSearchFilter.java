@@ -8,7 +8,6 @@ package ar.com.blox.bloxsys.search;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
  * @author Rodrigo M. Tato Rothamel mailto:rotatomel@gmail.com
  */
 public class ChoferesSearchFilter extends AbstractSearchFilter {
@@ -21,9 +20,12 @@ public class ChoferesSearchFilter extends AbstractSearchFilter {
 
     private Boolean activo;
 
+    private Integer diasLicenciaProximaVencer;
+
     @Override
     public boolean hasFilter() {
-        return hasTextFilter() || hasLicenciaExpiradaFilter() || hasActivoFilter();
+        return hasTextFilter() || hasLicenciaExpiradaFilter() || hasActivoFilter()
+                || hasDiasLicenciaProximaVencer();
     }
 
     public ChoferesSearchFilter() {
@@ -63,6 +65,31 @@ public class ChoferesSearchFilter extends AbstractSearchFilter {
 
     public boolean hasLicenciaExpiradaFilter() {
         return licenciaExpirada != null;
+    }
+
+    /**
+     * La cantidad de días (entero positivo) dentro del cual se considera que la licencia está próxima a expirar.
+     *
+     * @return
+     */
+    public Integer getDiasLicenciaProximaVencer() {
+        return diasLicenciaProximaVencer;
+    }
+
+    /**
+     * La cantidad de días (entero positivo) dentro del cual se considera que la licencia está próxima a expirar.
+     *
+     * @param diasLicenciaProximaVencer
+     */
+    public void setDiasLicenciaProximaVencer(Integer diasLicenciaProximaVencer) {
+        if (diasLicenciaProximaVencer != null && diasLicenciaProximaVencer < 0) {
+            throw new IllegalArgumentException("No puede ser negativo la cantidad de días de proximo vencimiento.");
+        }
+        this.diasLicenciaProximaVencer = diasLicenciaProximaVencer;
+    }
+
+    public boolean hasDiasLicenciaProximaVencer() {
+        return diasLicenciaProximaVencer != null;
     }
 
     public boolean hasActivoFilter() {

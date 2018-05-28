@@ -5,71 +5,73 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-        </f:facet>
-        <title>#{msg.appName}</title>
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+    </f:facet>
+    <title>#{msg.appName}</title>
 
-        <!--        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>-->
-        <h:outputScript name="js/nanoscroller.js" library="olympos-layout" />
-        <h:outputScript name="js/layout.js" library="olympos-layout" />
+    <!--        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>-->
+    <h:outputScript name="js/nanoscroller.js" library="olympos-layout"/>
+    <h:outputScript name="js/layout.js" library="olympos-layout"/>
 
-        <ui:insert name="head"/>
-        <link rel="shortcut icon" href="#{resource['images/favicon.svg']}" type="image/png"/>
-        <link rel="icon" href="#{resource['images/favicon.svg']}" type="image/png"/>
-
-
-    </h:head>
-
-    <h:body styleClass="BlueTopbar">
-
-        <h:form >
-            <ui:include src="topbar.xhtml" />
-        </h:form>
+    <ui:insert name="head"/>
+    <link rel="shortcut icon" href="#{resource['images/favicon.svg']}" type="image/png"/>
+    <link rel="icon" href="#{resource['images/favicon.svg']}" type="image/png"/>
 
 
-        <!-- LAYOUT CONTAINER -->
+</h:head>
 
-        <div id="layout-container">
-            <div id="layout-container-row">
+<h:body styleClass="BlueTopbar">
 
-                <!-- LAYOUT MENU COVER -->
-                <div id="layout-menu-cover" class="nano Animated03">
-                    <div id="layout-menu-cover-scroll-content" class="nano-content">
+    <h:form>
+        <ui:include src="topbar.xhtml"/>
+    </h:form>
 
-                        <ui:include src="layouttabmenu.xhtml" />
 
-                    </div>
-                </div>
+    <!-- LAYOUT CONTAINER -->
 
-                <!-- PORTLETS COVER -->
-                <div id="layout-portlets-cover">
-                    <h:form id="mesagesForm" >
+    <div id="layout-container">
+        <div id="layout-container-row">
 
-                        <p:messages autoUpdate="true" id="msgs" showSummary="true" showIcon="true"/>
+            <!-- LAYOUT MENU COVER -->
+            <div id="layout-menu-cover" class="nano Animated03">
+                <div id="layout-menu-cover-scroll-content" class="nano-content">
 
-                    </h:form>
-                    <ui:insert name="content">
-                        Template
-                    </ui:insert>
-
-                    <ui:include src="footer.xhtml" />
+                    <ui:include src="layouttabmenu.xhtml"/>
 
                 </div>
+            </div>
+
+            <!-- PORTLETS COVER -->
+            <div id="layout-portlets-cover">
+                <h:form id="mesagesForm">
+
+                    <p:messages autoUpdate="true" id="msgs" showSummary="true" showIcon="true"/>
+
+                </h:form>
+                <ui:insert name="content">
+                    Template
+                </ui:insert>
+                <h:form id="footerMesagesForm">
+                    <p:growl id="growl" autoUpdate="true" showDetail="true" sticky="true" globalOnly="true"/>
+                </h:form>
+                <ui:include src="footer.xhtml"/>
 
             </div>
-        </div>
 
-        <h:outputStylesheet name="css/core-layout.css" library="olympos-layout" />
-        <h:outputStylesheet name="css/animate.css" library="olympos-layout" />
-        <h:outputStylesheet name="css/nanoscroller.css" library="olympos-layout" />
-        <h:outputStylesheet name="css/olympos-font.css" library="olympos-layout" />
-        <h:outputStylesheet name="css/font-awesome.css" library="olympos-layout" />
-        <h:outputStylesheet name="css/olympos-layout.css" library="olympos-layout" />
-    </h:body>
+        </div>
+    </div>
+
+    <h:outputStylesheet name="css/core-layout.css" library="olympos-layout"/>
+    <h:outputStylesheet name="css/animate.css" library="olympos-layout"/>
+    <h:outputStylesheet name="css/nanoscroller.css" library="olympos-layout"/>
+    <h:outputStylesheet name="css/olympos-font.css" library="olympos-layout"/>
+    <h:outputStylesheet name="css/font-awesome.css" library="olympos-layout"/>
+    <h:outputStylesheet name="css/olympos-layout.css" library="olympos-layout"/>
+</h:body>
 
 </html>

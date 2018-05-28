@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        thead {
+            background-color: #4CAF50;
+            font-weight: bold;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+<p>Estimado: $supervisor.nombre</p>
+<p>Los siguientes choferes tienen sus licencias de conducir próximas a vencer:</p>
+</br></br>
+
+</br>
+
+    #if($choferes.size() > 0)
+
+    <table border="1">
+        <thead>
+        <td>Id</td>
+        <td>Apellido y Nombre</td>
+        <td>Fecha Vencimiento</td>
+        </thead>
+        #foreach( $chof in $choferes)
+            <tr>
+                <td>$chof.id</td>
+                <td>$chof.nombreCompleto</td>
+                <td>$dateTool.format('dd/MM/yyyy',$chof.fechaVencimientoLicencia)</td>
+            </tr>
+
+        #end
+    </table>
+    #end
+
+</br></br>
+<p>Por favor realice las acciones necesarias para asegurarse de que las licencias sean renovadas a tiempo.</p>
+</br></br>
+<u>Atte:</u> BloxSys.
+
+</body>
+
+</html>

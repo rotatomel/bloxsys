@@ -19,7 +19,9 @@ import ar.com.blox.bloxsys.domain.Chofer;
 import ar.com.blox.bloxsys.eao.AbstractFacade;
 import ar.com.blox.bloxsys.eao.ChoferesFacade;
 import ar.com.blox.bloxsys.search.ChoferesSearchFilter;
+import ar.com.blox.bloxsys.service.PeriodicNotificationService;
 import ar.com.blox.bloxsys.ui.search.AbstractSearchBean;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -42,6 +44,9 @@ public class ChoferesSearchBean extends AbstractSearchBean<Chofer, ChoferesSearc
 
     @EJB
     private ChoferesFacade choferesFacade;
+
+    @EJB
+    private PeriodicNotificationService periodicNotificationService;
 
     /**
      * Creates a new instance of UsuariosSearchBean
@@ -66,4 +71,8 @@ public class ChoferesSearchBean extends AbstractSearchBean<Chofer, ChoferesSearc
         }
     }
 
+
+    public void doEnviarNotificacionesLicencia() {
+        periodicNotificationService.notificarLicenciasPorExpirar();
+    }
 }

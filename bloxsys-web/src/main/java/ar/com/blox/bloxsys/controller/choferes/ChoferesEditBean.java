@@ -21,6 +21,7 @@ import ar.com.blox.bloxsys.eao.ChoferesFacade;
 import ar.com.blox.bloxsys.eao.UsuariosFacade;
 import ar.com.blox.bloxsys.search.UsuariosSearchFilter;
 import ar.com.blox.bloxsys.utils.JSFUtil;
+import org.omnifaces.el.functions.Dates;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -29,6 +30,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -82,8 +84,30 @@ public class ChoferesEditBean implements Serializable {
                 LOG.log(Level.SEVERE, "Chofer inexistente! {0}", idChofer);
                 throw new IllegalArgumentException(String.format("Chofer inexistente: %s", idChofer));
             }
+            verificarLicenciaProximaExpirar();
+
+        }
+    }
+
+    /**
+     * Chequea que queden 7 días o menos, o que ya esté vencida la licencia del chofer y muestra un mensaje por pantalla.
+     */
+    public void verificarLicenciaProximaExpirar() {
+        if (!choferActual.getActivo()) {
+            return;
         }
 
+        int cantDias = Dates.daysBetween(new Date(), choferActual.getFechaVencimientoLicencia());
+
+        if (cantDias > 0 && cantDias <= 7) {
+            //Próximo a vencer
+            JSFUtil.getInstance().addInfoMessage(String.format("Faltan: %d días para que la licencia del chofer se venza!", cantDias));
+
+        } else if (cantDias <= 0) {
+            //Venció
+            JSFUtil.getInstance().addWarningMessage("Licencia del chofer vencida!");
+
+        }
     }
 
     private void nuevoChofer() {
