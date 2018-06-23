@@ -4,3 +4,4 @@
 /bloxsys-ear/target/
 /bloxsys-ejb/target/
 *.idea
+*.iml
