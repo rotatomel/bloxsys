@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `vehiculos` (
   `fecha_compra` date NOT NULL,
   `capacidad_carga` int(11),
   `observaciones` text,
-  `id_tipo_vehiculo` int(11) not null
+  `id_tipo_vehiculo` int(11) not null,
   `activo` tinyint(1) not null DEFAULT '1',
   `version` integer not null default 0,
   PRIMARY KEY (`id_vehiculo`),
