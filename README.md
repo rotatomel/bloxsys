@@ -3,9 +3,9 @@ Repo para proyecto de BloxSys
 
 Requerimientos previos:
 
-* Java JDK >=8
+* Java JDK >= 8
 * MySQL >= 5
-* Maven
+* Maven >= 3
 
 
 ## Instrucciones para ejecutar: ##
@@ -86,7 +86,7 @@ Requerimientos previos:
 3. Compilar el proyecto con mvn clean install.
 1. Dentro de bloxsys/bloxsys-ear/target se habrá generado el archivo bloxsys-ear.ear
 1. Volver a iniciar WildFly, ingresar en la consola de administración y deployar el archivo.
-1. En un navegador http://localhost:8080/bloxsys se podrá acceder al sistema.
+1. En un navegador http://localhost:8080/bloxsys-web se podrá acceder al sistema.
 
 
 

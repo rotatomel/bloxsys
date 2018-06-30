@@ -1,5 +1,7 @@
 package ar.com.blox.bloxsys.domain;
 
+import ar.com.blox.bloxsys.validators.CUIT;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -33,6 +35,7 @@ public class Chofer extends BaseEntity {
 
     @NotNull
     @Column(name = "cuil")
+    @CUIT
     private Long cuil;
 
     @NotNull
