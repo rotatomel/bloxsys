@@ -2,7 +2,8 @@
 
 <!-- =========== FULL CONFIGURATION FILE ================================== -->
 
-<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<faces-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xsi:schemaLocation="
       http://xmlns.jcp.org/xml/ns/javaee
       http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
@@ -26,7 +27,9 @@
             <base-name>ar.com.blox.version</base-name>
             <var>version</var>
         </resource-bundle>
-
+        <message-bundle>
+            ar.com.blox.Validation
+        </message-bundle>
 
     </application>
     <converter>

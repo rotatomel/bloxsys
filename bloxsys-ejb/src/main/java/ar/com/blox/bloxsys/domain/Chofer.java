@@ -13,7 +13,8 @@ import java.util.Date;
  * @author Rodrigo M. Tato Rothamel mailto:rotatomel@gmail.com
  */
 @Entity
-@Table(name = "choferes")
+@Table(name = "choferes",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"cuil"})})
 @AttributeOverride(column = @Column(name = "id_chofer"), name = "id")
 public class Chofer extends BaseEntity {
 
@@ -34,7 +35,7 @@ public class Chofer extends BaseEntity {
     private String celularCorporativo;
 
     @NotNull
-    @Column(name = "cuil")
+    @Column(name = "cuil", unique = true)
     @CUIT
     private Long cuil;
 
@@ -57,7 +58,8 @@ public class Chofer extends BaseEntity {
     private Usuario supervisor;
 
     @Column(name = "email")
-    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "El email debe tener el formato correcto.")
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+            message = "El email debe tener el formato correcto.")
     private String email;
 
 

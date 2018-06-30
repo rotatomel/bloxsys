@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = CUITValidator.class)
 @Documented
 public @interface CUIT {
-    String message() default "El CUIT no es válido.";
+    String message() default "{ar.com.box.bloxsys.cuit.invalid.message}";
 
     Class<?>[] groups() default {};
 

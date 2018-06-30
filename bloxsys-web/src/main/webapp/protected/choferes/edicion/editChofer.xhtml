@@ -98,10 +98,12 @@ limitations under the License.
                     <p:outputLabel value="#{msg.fechaIngreso}:" for="fechaIngresoField"/>
                     <p:calendar id="fechaIngresoField" value="#{choferesEditBean.choferActual.fechaIngreso}"
                                 required="true"
-                                pattern="dd/MM/yyyy"/>
+                                pattern="dd/MM/yyyy"
+                                maxdate="#{now}"/>
                     <!-- Fecha Vencimiento de licencia -->
                     <p:outputLabel value="#{msg.fechaVencLicencia}:" for="fechaVencLicenciaField"/>
                     <p:calendar id="fechaVencLicenciaField"
+                                mindate="#{now}"
                                 value="#{choferesEditBean.choferActual.fechaVencimientoLicencia}"
                                 required="true"
                                 pattern="dd/MM/yyyy"/>

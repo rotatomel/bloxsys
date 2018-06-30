@@ -40,7 +40,7 @@ public class CUITValidatorTest {
     }
 
     class DummyTestClass {
-        @CUIT
+        @CUIT(message = "El CUIT no es válido.")
         Long cuit;
 
         public DummyTestClass(Long cuit) {
