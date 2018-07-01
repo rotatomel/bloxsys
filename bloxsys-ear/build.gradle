@@ -1,0 +1,21 @@
+description = 'bloxsys-ear'
+apply plugin: 'ear'
+apply plugin: 'java'
+
+dependencies {
+    /*deploy project(':bloxsys-ejb')*/
+    deploy project(path: ':bloxsys-ejb',configuration: 'archives')
+    deploy project(path: ':bloxsys-web', configuration: 'archives')
+    earlib project(':bloxsys-ejb')
+    earlib project(':bloxsys-api')
+
+}
+
+
+ear {
+    archiveName = baseName + '.' + extension
+    deploymentDescriptor {
+        webModule("bloxsys-web.war", "/bloxsys-web")
+        module("bloxsys-ejb.jar", "java")
+    }
+}

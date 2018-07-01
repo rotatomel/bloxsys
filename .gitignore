@@ -5,3 +5,12 @@
 /bloxsys-ejb/target/
 *.idea
 *.iml
+gradlew
+gradlew.bat
+/build/
+/bloxsys-web/build/
+/bloxsys-api/build/
+/bloxsys-ear/build/
+/bloxsys-ejb/build/
+.gradle/
+gradle/
