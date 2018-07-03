@@ -61,15 +61,15 @@ limitations under the License.
                              styleClass="ui-panelgrid-blank" columns="2"
                              rendered="#{controlCargaDummyBean.camionEnBalanza}">
                     <p:outputLabel value="Patente:"/>
-                    <p:outputLabel value="#{controlCargaDummyBean.datosBalanza.patenteCamion}"/>
+                    <p:outputLabel value="#{controlCargaDummyBean.controlCarga.dominio}"/>
 
 
                     <p:outputLabel value="Peso censado:"/>
-                    <p:outputLabel value="#{controlCargaDummyBean.datosBalanza.peso} Kgs"/>
+                    <p:outputLabel value="#{controlCargaDummyBean.controlCarga.pesoCensado} Kgs"/>
 
 
                     <p:outputLabel value="Ingrese Nro Remito:"/>
-                    <p:inputText value="#{controlCargaDummyBean.nroRemito}"/>
+                    <p:inputText value="#{controlCargaDummyBean.controlCarga.nroRemito}" maxlength="45" required="true"/>
 
                     <p:outputLabel
                             rendered="#{controlCargaDummyBean.camionEnBalanza and not controlCargaDummyBean.remitoValidado}"/>
@@ -84,12 +84,16 @@ limitations under the License.
 
 
                     <p:outputLabel value="Peso declarado:" rendered="#{controlCargaDummyBean.remitoValidado}"/>
-                    <p:outputLabel value="#{controlCargaDummyBean.pesoDeclarado} Kgs"
+                    <p:outputLabel value="#{controlCargaDummyBean.controlCarga.pesoDeclarado} Kgs"
                                    rendered="#{controlCargaDummyBean.remitoValidado}"/>
 
                     <p:outputLabel value="Diferencia:" rendered="#{controlCargaDummyBean.remitoValidado}"/>
-                    <p:outputLabel value="#{controlCargaDummyBean.diferencia} Kgs"
+                    <p:outputLabel value="#{controlCargaDummyBean.controlCarga.diferencia} Kgs"
                                    rendered="#{controlCargaDummyBean.remitoValidado}"/>
+
+                    <p:outputLabel rendered="#{controlCargaDummyBean.remitoValidado}" value="Observaciones:"/>
+                    <p:inputTextarea rendered="#{controlCargaDummyBean.remitoValidado}"
+                                     value="#{controlCargaDummyBean.controlCarga.observaciones}" />
 
 
                     <p:outputLabel rendered="#{controlCargaDummyBean.remitoValidado}"/>

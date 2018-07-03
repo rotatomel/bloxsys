@@ -105,3 +105,21 @@ CREATE TABLE IF NOT EXISTS `vehiculos_novedades`(
     CONSTRAINT `fk_vehiculos_novedades_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `fk_vehiculos_novedades_chofer` FOREIGN KEY (`id_chofer`) REFERENCES `choferes` (`id_chofer`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `contoles_carga`;
+CREATE TABLE IF NOT EXISTS `contoles_carga` (
+  `id_control` int(11) NOT NULL AUTO_INCREMENT,
+  `dominio` varchar(8) NOT NULL,
+  `nro_remito` varchar(45) NOT NULL,
+  `fecha_control` DATETIME NOT NULL,
+  `peso_declarado` decimal(19,2) not null,
+  `peso_censado` decimal(19,2) not null,
+  `diferencia` decimal(19,2) not null,
+  `observaciones` text,
+  `id_usuario` int(11) NOT NULL,
+  `version` integer not null default 0,
+  PRIMARY KEY (`id_control`),
+  CONSTRAINT `fk_contoles_carga_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -16,8 +16,14 @@
 
 package ar.com.blox.bloxsys.controller.carga;
 
+import ar.com.blox.bloxsys.auth.AuthBackingBean;
+import ar.com.blox.bloxsys.domain.ControlCarga;
+import ar.com.blox.bloxsys.eao.ControlCargaFacade;
+
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.math.BigDecimal;
 import java.util.Random;
@@ -26,15 +32,20 @@ import java.util.Random;
 @ViewScoped
 public class ControlCargaDummyBean {
 
+
+    @ManagedProperty(value = "#{authBackingBean}")
+    private AuthBackingBean authBackingBean;
+
+    @EJB
+    private ControlCargaFacade facade;
+
     private final Random r = new Random();
     private boolean balanzaHabilitada = false;
     private boolean camionEnBalanza = false;
     private boolean remitoValidado = false;
     private String estado = "Balanza deshabilitada";
-    private String nroRemito;
-    private BigDecimal pesoDeclarado;
-    private BigDecimal diferencia;
-    private DatosBalanza datosBalanza = null;
+
+    private ControlCarga controlCarga = null;
 
     public ControlCargaDummyBean() {
     }
@@ -59,19 +70,23 @@ public class ControlCargaDummyBean {
     public void doIngresaCamion() {
         estado = "Camion Ingresado";
         camionEnBalanza = true;
-        datosBalanza = new DatosBalanza();
-        datosBalanza.patenteCamion = getPatenteAleatoria();
-        datosBalanza.peso = new BigDecimal(r.nextDouble() * 10000);
-        datosBalanza.peso = datosBalanza.peso.setScale(2, BigDecimal.ROUND_HALF_UP);
+        controlCarga = new ControlCarga();
+        controlCarga.setIdUsuario(authBackingBean.getUserLoggedIn());
+
+        controlCarga.setDominio(getPatenteAleatoria());
+        controlCarga.setPesoCensado(
+                new BigDecimal(r.nextDouble() * 10000).setScale(2, BigDecimal.ROUND_HALF_UP));
+
     }
 
 
     public void doValidarRemito() {
         estado = "Remito validado";
         remitoValidado = true;
-        pesoDeclarado = new BigDecimal(r.nextDouble() * 10000);
-        pesoDeclarado = pesoDeclarado.setScale(2, BigDecimal.ROUND_HALF_UP);
-        diferencia = datosBalanza.getPeso().subtract(pesoDeclarado);
+        controlCarga.setPesoDeclarado(
+                new BigDecimal(r.nextDouble() * 10000).setScale(2, BigDecimal.ROUND_HALF_UP));
+        controlCarga.setDiferencia(controlCarga.getPesoCensado().subtract(controlCarga.getPesoDeclarado()));
+
     }
 
     public void doGuardar() {
@@ -79,20 +94,9 @@ public class ControlCargaDummyBean {
         camionEnBalanza = false;
         remitoValidado = false;
         estado = "Balanza deshabilitada";
-        nroRemito = null;
+        facade.createOrEdit(controlCarga);
     }
 
-    public String getNroRemito() {
-        return nroRemito;
-    }
-
-    public void setNroRemito(String nroRemito) {
-        this.nroRemito = nroRemito;
-    }
-
-    public DatosBalanza getDatosBalanza() {
-        return datosBalanza;
-    }
 
     public boolean isBalanzaHabilitada() {
         return balanzaHabilitada;
@@ -106,17 +110,10 @@ public class ControlCargaDummyBean {
         return estado;
     }
 
-    public BigDecimal getPesoDeclarado() {
-        return pesoDeclarado;
-    }
-
     public boolean isRemitoValidado() {
         return remitoValidado;
     }
 
-    public BigDecimal getDiferencia() {
-        return diferencia;
-    }
 
     /**
      * Genera una patente aleatoria que debería venir del WebService de la balanza
@@ -137,28 +134,15 @@ public class ControlCargaDummyBean {
         return patente.toString();
     }
 
-    public class DatosBalanza {
-        private String patenteCamion;
-        private BigDecimal peso;
-
-        DatosBalanza() {
-        }
-
-        public String getPatenteCamion() {
-            return patenteCamion;
-        }
-
-        public void setPatenteCamion(String patenteCamion) {
-            this.patenteCamion = patenteCamion;
-        }
-
-        public BigDecimal getPeso() {
-            return peso;
-        }
-
-        public void setPeso(BigDecimal peso) {
-            this.peso = peso;
-        }
+    public ControlCarga getControlCarga() {
+        return controlCarga;
     }
 
+    public AuthBackingBean getAuthBackingBean() {
+        return authBackingBean;
+    }
+
+    public void setAuthBackingBean(AuthBackingBean authBackingBean) {
+        this.authBackingBean = authBackingBean;
+    }
 }
