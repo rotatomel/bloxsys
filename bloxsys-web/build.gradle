@@ -18,4 +18,15 @@ dependencies {
 
 war {
     archiveName = baseName + '.' + extension
+
+    def var = new Properties()
+    File myfile = file("src/main/resources/ar/com/blox/version.properties");
+
+    var.load(myfile.newDataInputStream())
+    var.setProperty("version", project.version)
+    var.setProperty("build", new Date().format('yyyy-MM-dd HH:mm:ss'))
+    var.store(myfile.newWriter(), null)
 }
+
+
+
