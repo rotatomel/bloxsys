@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Entidad de Vehiculo
+ * Entidad de Control de Carga. Representa una carga ingresada a la balanza que fue conciliada contra el remito.
  *
  * @author Rodrigo M. Tato Rothamel mailto:rotatomel@gmail.com
  */

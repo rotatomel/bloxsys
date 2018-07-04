@@ -13,32 +13,45 @@
                             <p:menuitem id="om_db_b" value="Dashboard Banking" icon="icon-website22" />
                         </p:submenu>-->
 
-            <p:submenu id="sistemaMenu" label="#{msg.sistema}" icon="fa fa-fw fa-dashboard" >
-                <p:submenu id="archivoSubMenu" label="#{msg.archivo}" icon="fa fa-fw fa-folder-open" >
+            <p:submenu id="sistemaMenu" label="#{msg.sistema}" icon="fa fa-fw fa-dashboard">
+                <p:submenu id="archivoSubMenu" label="#{msg.archivo}" icon="fa fa-fw fa-folder-open">
 
 
+                    <!--                    <p:menuitem value="#{msg.parametros}" icon="fa fa-fw fa-gears" action="/protected/parametros/parametroSearch.xhtml?faces-redirect=true" immediate="true" ajax="false"/>-->
 
-<!--                    <p:menuitem value="#{msg.parametros}" icon="fa fa-fw fa-gears" action="/protected/parametros/parametroSearch.xhtml?faces-redirect=true" immediate="true" ajax="false"/>-->
+                    <p:menuitem value="#{msg.usuarios}" icon="fa fa-fw fa-users"
+                                action="/protected/admin/usuarios/index.xhtml?faces-redirect=true" immediate="true"
+                                ajax="false" rendered="#{authBackingBean.isUserInRoleAdmin}"/>
 
-                    <p:menuitem value="#{msg.usuarios}" icon="fa fa-fw fa-users" action="/protected/admin/usuarios/index.xhtml?faces-redirect=true" immediate="true" ajax="false" rendered="#{authBackingBean.isUserInRoleAdmin}"/>
+                    <p:menuitem value="#{msg.choferes}" icon="fa fa-fw fa-user"
+                                action="/protected/choferes/index.xhtml?faces-redirect=true" immediate="true"
+                                ajax="false"/>
 
-                    <p:menuitem value="#{msg.choferes}" icon="fa fa-fw fa-user" action="/protected/choferes/index.xhtml?faces-redirect=true" immediate="true" ajax="false"/>
-
-                    <p:submenu id="vehiculoMenu" label="#{msg.flota}" icon="fa fa-fw fa-truck" >
+                    <p:submenu id="vehiculoMenu" label="#{msg.flota}" icon="fa fa-fw fa-truck">
                         <p:menuitem value="#{msg.vehiculosTipos}" icon="fa fa-fw fa-car"
                                     action="/protected/vehiculos/tipos_vehiculo/index.xhtml?faces-redirect=true"
                                     immediate="true" ajax="false"/>
-                        <p:menuitem value="#{msg.vehiculos}" icon="fa fa-fw fa-truck" action="/protected/vehiculos/index.xhtml?faces-redirect=true" immediate="true" ajax="false"/>
-                        <p:menuitem value="#{msg.novedades}" icon="fa fa-fw fa-file" action="/protected/vehiculos/novedades/index.xhtml?faces-redirect=true" immediate="true" ajax="false"/>
+                        <p:menuitem value="#{msg.vehiculos}" icon="fa fa-fw fa-truck"
+                                    action="/protected/vehiculos/index.xhtml?faces-redirect=true" immediate="true"
+                                    ajax="false"/>
+                        <p:menuitem value="#{msg.novedades}" icon="fa fa-fw fa-file"
+                                    action="/protected/vehiculos/novedades/index.xhtml?faces-redirect=true"
+                                    immediate="true" ajax="false"/>
 
                     </p:submenu>
 
-                    <p:menuitem value="#{msg.controlCarga}" icon="fa fa-fw fa-cubes"
-                                action="/protected/balanza/index.xhtml?faces-redirect=true"
-                                immediate="true" ajax="false"/>
+                    <p:submenu id="controlCargaMenu" label="#{msg.controlCarga}" icon="fa fa-fw fa-cubes">
+
+                        <p:menuitem value="#{msg.balanza}" icon="fa fa-fw fa-cubes"
+                                    action="/protected/balanza/index.xhtml?faces-redirect=true"
+                                    immediate="true" ajax="false"/>
+
+                        <p:menuitem value="#{msg.historial}" icon="fa fa-fw fa-file"
+                                    action="/protected/balanza/historial/index.xhtml?faces-redirect=true"
+                                    immediate="true" ajax="false"/>
+                    </p:submenu>
 
                 </p:submenu>
-
 
 
             </p:submenu>

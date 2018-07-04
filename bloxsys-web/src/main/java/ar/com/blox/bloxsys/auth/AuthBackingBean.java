@@ -15,9 +15,6 @@
  */
 package ar.com.blox.bloxsys.auth;
 
-//import ar.com.blox.bloxsys.domain.Usuario;
-//import ar.com.blox.bloxsys.eao.UsuariosFacade;
-//import ar.com.blox.bloxsys.search.UsuariosSearchFilter;
 import ar.com.blox.bloxsys.domain.RolesEnum;
 import ar.com.blox.bloxsys.domain.Usuario;
 import ar.com.blox.bloxsys.domain.UsuarioRol;
